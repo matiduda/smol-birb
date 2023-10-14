@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://soi0ukhd5ia7"]
+
+[node name="demo" type="Node2D"]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 461.0
+offset_top = 286.0
+offset_right = 602.0
+offset_bottom = 342.0
+text = "Big Birb Run"
