@@ -6,6 +6,7 @@ on:
 jobs:
   export_game:
     # Always use ubuntu-latest for this action
+    if: "!contains(github.event.head_commit.message, '!build')"
     runs-on: ubuntu-latest
     name: Export game to Github
     steps:
