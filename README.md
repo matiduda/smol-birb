@@ -15,4 +15,3 @@ $ git config --global user.email your@email.com
 4. Open the project in godot and go to Project > Version Control > Version Control Settings and put your github credentials there (SSH key not needed)
 
 5. Go to Editor > Manage Export Templates > click Download and Install
-
