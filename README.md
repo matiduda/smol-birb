@@ -16,5 +16,3 @@ $ git config --global user.email your@email.com
 
 5. Go to Editor > Manage Export Templates > click Download and Install
 
-TODO:
-- Auto release versioning
