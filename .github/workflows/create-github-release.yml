@@ -21,7 +21,7 @@ jobs:
         with:
           keep_latest: 0
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_CREDENTIALS }}
+          GITHUB_TOKEN: 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
 
       - name: Download Gotot Engine and create game build
         id: export
@@ -38,7 +38,7 @@ jobs:
       - name: Create new release
         uses: ncipollo/release-action@v1.13.0
         with:
-          token: ${{ secrets.GIT_CREDENTIALS }}
+          token: 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
           generateReleaseNotes: true
           tag: ${{ github.ref_name }}
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
