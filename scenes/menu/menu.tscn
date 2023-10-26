@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://soi0ukhd5ia7"]
+
+[ext_resource type="Texture2D" uid="uid://d3qs3kcfo86vu" path="res://assets/interface/graphics/logo.png" id="1_qqak4"]
+[ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_u5aox"]
+[ext_resource type="Script" path="res://scenes/menu/scripts/MenuButton.gd" id="3_f3ddh"]
+
+[sub_resource type="Gradient" id="Gradient_d7b3v"]
+offsets = PackedFloat32Array(0, 0.32967, 1)
+colors = PackedColorArray(0.184314, 0.529412, 0.921569, 1, 0.490823, 0.700689, 0.822, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g5787"]
+gradient = SubResource("Gradient_d7b3v")
+
+[sub_resource type="Theme" id="Theme_prrhd"]
+
+[node name="menu" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(360, 640)
+rotation = 1.5708
+scale = Vector2(19.9997, 11.2495)
+texture = SubResource("GradientTexture2D_g5787")
+
+[node name="LogoContainer" type="CenterContainer" parent="."]
+offset_left = 360.0
+offset_top = 640.0
+offset_right = 400.0
+offset_bottom = 680.0
+use_top_left = true
+
+[node name="Logo" type="Sprite2D" parent="LogoContainer"]
+position = Vector2(0, -250)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("1_qqak4")
+
+[node name="ButtonsContainer" type="CenterContainer" parent="."]
+offset_left = 360.0
+offset_top = 1000.0
+offset_right = 360.0
+offset_bottom = 1000.0
+scale = Vector2(0.8, 0.8)
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonsContainer"]
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="ButtonsContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_prrhd")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "Start"
+icon = ExtResource("2_u5aox")
+icon_alignment = 1
+script = ExtResource("3_f3ddh")
+
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/MenuButton" to="ButtonsContainer/VBoxContainer/MenuButton" method="_on_pressed"]

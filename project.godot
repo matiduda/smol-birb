@@ -11,8 +11,16 @@ config_version=5
 [application]
 
 config/name="Big Birb Run"
-run/main_scene="res://demo.tscn"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.1")
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+window/handheld/orientation=1
 
 [editor]
 
@@ -25,4 +33,6 @@ enabled=PackedStringArray()
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

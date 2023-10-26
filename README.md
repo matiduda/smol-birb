@@ -17,3 +17,14 @@ $ git config --global user.email your@email.com
 5. Open the project in godot and go to Project > Version Control > Version Control Settings and put your github credentials there (SSH key not needed)
 6. Go to Editor > Manage Export Templates > click Download and Install
 7. You're ready to start developing features
+
+## Code guidelines
+
+- When adding new scenes, scripts or assets, adjust them to fit current structure
+- Use [signals](https://www.youtube.com/watch?v=NK_SYVO7lMA) and build-in nodes and methods as ofter as you can
+
+## Used assets
+
+> Please keep up to date
+
+- Game logo font https://www.dafont.com/m23-hydrant-special.font?fpp=200&text=SMOL+BIRB
