@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d3qs3kcfo86vu" path="res://assets/interface/graphics/logo.png" id="1_qqak4"]
 [ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_u5aox"]
-[ext_resource type="Script" path="res://scenes/menu/scripts/MenuButton.gd" id="3_f3ddh"]
+[ext_resource type="Script" path="res://scenes/menu/scripts/ButtonController.gd" id="3_cj4rd"]
 
 [sub_resource type="Gradient" id="Gradient_d7b3v"]
 offsets = PackedFloat32Array(0, 0.32967, 1)
@@ -43,8 +43,9 @@ use_top_left = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 
-[node name="MenuButton" type="MenuButton" parent="ButtonsContainer/VBoxContainer"]
+[node name="StartButton" type="MenuButton" parent="ButtonsContainer/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_prrhd")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -57,6 +58,23 @@ theme_override_font_sizes/font_size = 75
 text = "Start"
 icon = ExtResource("2_u5aox")
 icon_alignment = 1
-script = ExtResource("3_f3ddh")
+script = ExtResource("3_cj4rd")
+scene_path = "res://scenes/game/game.tscn"
 
-[connection signal="pressed" from="ButtonsContainer/VBoxContainer/MenuButton" to="ButtonsContainer/VBoxContainer/MenuButton" method="_on_pressed"]
+[node name="StoreButton" type="MenuButton" parent="ButtonsContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_prrhd")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "Store"
+icon = ExtResource("2_u5aox")
+icon_alignment = 1
+script = ExtResource("3_cj4rd")
+
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_on_pressed"]
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StoreButton" method="_on_pressed"]
