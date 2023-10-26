@@ -76,5 +76,5 @@ icon = ExtResource("2_u5aox")
 icon_alignment = 1
 script = ExtResource("3_cj4rd")
 
-[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_on_pressed"]
-[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StoreButton" method="_on_pressed"]
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_do_nothing"]

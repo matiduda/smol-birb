@@ -9,5 +9,5 @@ func _switch_to_scene():
 	get_tree().root.add_child(game_scene)
 	get_node("/root/menu").free()
 
-func _on_pressed():
-	_switch_to_scene()
+func _do_nothing():
+	print("Store not yet implemented")
