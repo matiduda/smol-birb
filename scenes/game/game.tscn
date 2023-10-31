@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://t8ii3gmlqbec"]
+[gd_scene load_steps=6 format=3 uid="uid://t8ii3gmlqbec"]
 
 [ext_resource type="Texture2D" uid="uid://eun4hkixjgvw" path="res://assets/tilemap/tilemap.png" id="1_rtstu"]
 [ext_resource type="PackedScene" uid="uid://c056v766y5uxb" path="res://scenes/player/player.tscn" id="2_lyhcf"]
+[ext_resource type="PackedScene" uid="uid://s6vocm7x3a4s" path="res://scenes/platform/platform.tscn" id="3_v8o81"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l47ca"]
 texture = ExtResource("1_rtstu")
@@ -548,5 +549,14 @@ tile_set = SubResource("TileSet_yhk4f")
 format = 2
 
 [node name="Player" parent="." instance=ExtResource("2_lyhcf")]
-position = Vector2(360, 1200)
+position = Vector2(390, 806)
 scale = Vector2(10, 10)
+
+[node name="platform" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(276, 972)
+
+[node name="platform2" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(28, 744)
+
+[node name="platform3" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(490, 832)

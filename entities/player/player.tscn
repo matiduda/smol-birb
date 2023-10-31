@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c056v766y5uxb"]
 
-[ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_7wl8o"]
+[ext_resource type="Script" path="res://entities/player/Player.gd" id="1_7wl8o"]
 [ext_resource type="Texture2D" uid="uid://kl31djl26dv3" path="res://assets/characters/birb.png" id="1_o18xy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88lox"]
