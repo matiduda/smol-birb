@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://t8ii3gmlqbec"]
+[gd_scene load_steps=7 format=3 uid="uid://t8ii3gmlqbec"]
 
 [ext_resource type="Texture2D" uid="uid://eun4hkixjgvw" path="res://assets/tilemap/tilemap.png" id="1_rtstu"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_vwakq"]
 [ext_resource type="PackedScene" uid="uid://c056v766y5uxb" path="res://scenes/player/player.tscn" id="2_lyhcf"]
 [ext_resource type="PackedScene" uid="uid://s6vocm7x3a4s" path="res://scenes/platform/platform.tscn" id="3_v8o81"]
-[ext_resource type="Script" path="res://scenes/game/Camera2D.gd" id="5_821do"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l47ca"]
 texture = ExtResource("1_rtstu")
@@ -548,21 +547,24 @@ sources/0 = SubResource("TileSetAtlasSource_l47ca")
 script = ExtResource("1_vwakq")
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(10, -52)
 tile_set = SubResource("TileSet_yhk4f")
 format = 2
 
 [node name="Player" parent="." instance=ExtResource("2_lyhcf")]
-position = Vector2(387, 1219)
+position = Vector2(393, 1141)
 scale = Vector2(10, 10)
 
 [node name="platform" parent="." instance=ExtResource("3_v8o81")]
-position = Vector2(-2, 1244)
-scale = Vector2(4.8, 3.878)
+position = Vector2(-8, 1244)
 
-[node name="platform6" parent="." instance=ExtResource("3_v8o81")]
-position = Vector2(450, 850)
+[node name="platform2" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(136, 1244)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(360, 640)
-script = ExtResource("5_821do")
+[node name="platform3" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(282, 1244)
+
+[node name="platform4" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(568, 1243)
+
+[node name="platform5" parent="." instance=ExtResource("3_v8o81")]
+position = Vector2(426, 1244)
