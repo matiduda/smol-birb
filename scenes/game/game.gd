@@ -25,7 +25,7 @@ func spawn_platforms_inbounds():
 		var generated_position = Vector2(randf_range(0, position_cap.x - PLATFORM_WIDTH), randf_range($Player.position.y + position_cap.y, $Camera2D.position.y + TOP_POSITION_CAP))
 		# check if position is valid - too close to other platform makes it invalid
 		for platform in existing_platforms:
-			if (abs(generated_position.y - platform.position.y) <= PLATFORM_MIN_DISTANCE_Y):
+			if abs(generated_position.y - platform.position.y) <= PLATFORM_MIN_DISTANCE_Y:
 				return null
 		new_platform = platform.instantiate() 
 		new_platform.position = generated_position

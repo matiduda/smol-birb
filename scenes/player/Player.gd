@@ -37,4 +37,3 @@ func _physics_process(delta):
 
 func handle_game_over():
 	print("GAME OVER")
-	queue_free()
