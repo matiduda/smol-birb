@@ -129,14 +129,15 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_7wl8o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 1)
+position = Vector2(-0.750002, -7)
 shape = SubResource("RectangleShape2D_88lox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2.5, 2.34375)
+position = Vector2(-0.25, -5.65625)
 scale = Vector2(0.84375, 0.84375)
 texture = ExtResource("1_o18xy")
 offset = Vector2(0, -1)
