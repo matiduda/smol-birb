@@ -10,6 +10,7 @@ var collected_eggs = 0
 var collected_golden_eggs = 0
 
 var player_dead = false
+signal player_out_of_screen;
 
 func _physics_process(delta):
 	# APPLY GRAVITY
@@ -50,6 +51,7 @@ func _physics_process(delta):
 func handle_game_over():
 	
 	player_dead = true
+	player_out_of_screen.emit()
 	
 	# SAVE PROGRESS
 	var data = SavedData.new()
@@ -60,6 +62,7 @@ func handle_game_over():
 	data.eggs = already_persisted_data.eggs + collected_eggs
 	data.golden_eggs = already_persisted_data.golden_eggs + collected_golden_eggs
 	GameResourceSaver.save_data(data)
+	
 	
 func add_item(item_type):
 	if item_type == ItemType.EGG:
