@@ -7,7 +7,7 @@ func load_data() -> SavedData:
 		var data = ResourceLoader.load(FILE_NAME)
 		if data is SavedData:
 			return data
-	print("FAILED TO LOAD DATA - RETURNING DEFAULT")
+	print("SAVING FILE DOES NOT EXIST - RETURNING DEFAULT DATA")
 	return SavedData.new()
 
 func save_data(data: SavedData):

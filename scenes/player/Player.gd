@@ -48,9 +48,12 @@ func handle_game_over():
 	
 	# SAVE PROGRESS
 	var data = SavedData.new()
-	data.highscore = highscore
-	data.eggs = collected_eggs
-	data.golden_eggs = collected_golden_eggs
+	var already_persisted_data = GameResourceSaver.load_data()
+	
+	if highscore > already_persisted_data.highscore:
+		data.highscore = highscore
+	data.eggs = already_persisted_data.eggs + collected_eggs
+	data.golden_eggs = already_persisted_data.golden_eggs + collected_golden_eggs
 	GameResourceSaver.save_data(data)
 	
 func add_item(item_type):

@@ -6,7 +6,7 @@ class_name Platform
 const ITEM_SPAWN_OFFSET_Y = 2
 
 const EGG_SPAWN_CHANCE = .4
-const GOLDEN_EGG_SPAWN_CHANCE = .1
+const GOLDEN_EGG_SPAWN_CHANCE = .2
 
 var egg = preload("res://scenes/items/egg/Egg.tscn")
 var golden_egg = preload("res://scenes/items/golden_egg/GoldenEgg.tscn")

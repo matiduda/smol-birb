@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://soi0ukhd5ia7"]
+[gd_scene load_steps=10 format=3 uid="uid://soi0ukhd5ia7"]
 
+[ext_resource type="Script" path="res://scenes/menu/scripts/Menu.gd" id="1_ky4yk"]
 [ext_resource type="Texture2D" uid="uid://d3qs3kcfo86vu" path="res://assets/interface/graphics/logo.png" id="1_qqak4"]
 [ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_u5aox"]
 [ext_resource type="Script" path="res://scenes/menu/scripts/ButtonController.gd" id="3_cj4rd"]
+[ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="4_h0m5e"]
+[ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="5_2ngek"]
 
 [sub_resource type="Gradient" id="Gradient_d7b3v"]
 offsets = PackedFloat32Array(0, 0.32967, 1)
@@ -14,6 +17,7 @@ gradient = SubResource("Gradient_d7b3v")
 [sub_resource type="Theme" id="Theme_prrhd"]
 
 [node name="menu" type="Node2D"]
+script = ExtResource("1_ky4yk")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(360, 640)
@@ -75,6 +79,34 @@ text = "Store"
 icon = ExtResource("2_u5aox")
 icon_alignment = 1
 script = ExtResource("3_cj4rd")
+
+[node name="Eggs" type="Node2D" parent="."]
+
+[node name="EggSprite" type="Sprite2D" parent="Eggs"]
+position = Vector2(503.125, 51.875)
+scale = Vector2(1.13462, 1.13462)
+texture = ExtResource("4_h0m5e")
+
+[node name="GoldenEggSprite" type="Sprite2D" parent="Eggs"]
+position = Vector2(512, 142)
+scale = Vector2(0.0932928, 0.0932928)
+texture = ExtResource("5_2ngek")
+
+[node name="GoldenEggLabel" type="Label" parent="Eggs"]
+offset_left = 559.0
+offset_top = 120.0
+offset_right = 675.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 28
+vertical_alignment = 1
+
+[node name="EggLabel" type="Label" parent="Eggs"]
+offset_left = 559.0
+offset_top = 31.0
+offset_right = 675.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 28
+vertical_alignment = 1
 
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_do_nothing"]
