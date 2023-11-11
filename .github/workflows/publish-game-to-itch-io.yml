@@ -21,9 +21,3 @@ jobs:
           ITCH_USER: tanczmy
           PACKAGE: itch.io.zip
           VERSION: ${{ steps.download-html.outputs.version }}
-
-      - name: notify on discord
-        uses: sarisia/actions-status-discord@v1
-        if: always()
-        with:
-          webhook: ${{ secrets.DISCORD }}

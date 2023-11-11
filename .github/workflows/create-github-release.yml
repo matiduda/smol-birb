@@ -47,3 +47,4 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD }}
+          description: Check on https://tanczmy.itch.io/big-birb-run
