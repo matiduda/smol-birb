@@ -1,8 +1,14 @@
 extends CharacterBody2D
+class_name Player
 
 const SPEED = 600.0
 const JUMP_VELOCITY = -1250.0
 var GRAVITY = 1000
+
+var highscore = 0
+var collected_golden_eggs = 0
+
+var player_dead = false
 
 func _physics_process(delta):
 	# APPLY GRAVITY
@@ -30,10 +36,21 @@ func _physics_process(delta):
 		global_position.x = 0
 	
 	# HANDLE GAME OVER
-	if global_position.y > get_viewport_rect().size.y:
+	if global_position.y > get_viewport_rect().size.y and not player_dead:
 		handle_game_over()
 
 	move_and_slide()
 
 func handle_game_over():
-	print("GAME OVER")
+	
+	player_dead = true
+	
+	# SAVE PROGRESS
+	var data = SavedData.new()
+	data.highscore = highscore
+	data.golden_eggs = collected_golden_eggs
+	GameResourceSaver.save_data(data)
+	
+func add_item(item_type):
+	if item_type == ItemType.GOLDEN_EGG:
+		collected_golden_eggs += 1
