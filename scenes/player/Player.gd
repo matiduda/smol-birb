@@ -25,10 +25,15 @@ func _physics_process(delta):
 		
 	# HERE WE USE ARROWS TO MOVE, SHOULD CHANGE TO GYROSCOPE LATER
 	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+	var gyroscope = Input.get_accelerometer()
+	
+	if gyroscope.x != 0:
+		velocity.x = gyroscope.normalized().x * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	# TELEPORT PLAYER TO LEFT OR RIGHT SCREEN SIDE WHEN OUT OF BOUNDS
 	if global_position.x < 0:
