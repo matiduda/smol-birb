@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -1250.0
 var GRAVITY = 1000
 
 var highscore = 0
+var collected_eggs = 0
 var collected_golden_eggs = 0
 
 var player_dead = false
@@ -48,9 +49,12 @@ func handle_game_over():
 	# SAVE PROGRESS
 	var data = SavedData.new()
 	data.highscore = highscore
+	data.eggs = collected_eggs
 	data.golden_eggs = collected_golden_eggs
 	GameResourceSaver.save_data(data)
 	
 func add_item(item_type):
-	if item_type == ItemType.GOLDEN_EGG:
+	if item_type == ItemType.EGG:
+		collected_eggs += 1
+	elif item_type == ItemType.GOLDEN_EGG:
 		collected_golden_eggs += 1
