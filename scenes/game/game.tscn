@@ -578,20 +578,20 @@ z_index = 999
 position = Vector2(-2, 2)
 script = ExtResource("7_x3nxu")
 
-[node name="LeftTouchArea" type="TouchScreenButton" parent="."]
-position = Vector2(179, 649)
+[node name="LeftTouchArea" type="TouchScreenButton" parent="Camera2D"]
+position = Vector2(-181, 9)
 shape = SubResource("RectangleShape2D_mark6")
 shape_centered = false
 shape_visible = false
 
-[node name="RightTouchArea" type="TouchScreenButton" parent="."]
-position = Vector2(540, 649)
+[node name="RightTouchArea" type="TouchScreenButton" parent="Camera2D"]
+position = Vector2(180, 9)
 shape = SubResource("RectangleShape2D_mark6")
 shape_centered = false
 shape_visible = false
 
 [connection signal="player_out_of_screen" from="Player" to="Camera2D/gameOver" method="_on_player_player_out_of_screen"]
-[connection signal="pressed" from="LeftTouchArea" to="Player" method="set_touch_direction_left"]
-[connection signal="released" from="LeftTouchArea" to="Player" method="reset_touch"]
-[connection signal="pressed" from="RightTouchArea" to="Player" method="set_touch_direction_right"]
-[connection signal="released" from="RightTouchArea" to="Player" method="reset_touch"]
+[connection signal="pressed" from="Camera2D/LeftTouchArea" to="Player" method="set_touch_direction_left"]
+[connection signal="released" from="Camera2D/LeftTouchArea" to="Player" method="reset_touch"]
+[connection signal="pressed" from="Camera2D/RightTouchArea" to="Player" method="set_touch_direction_right"]
+[connection signal="released" from="Camera2D/RightTouchArea" to="Player" method="reset_touch"]
