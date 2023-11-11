@@ -5,6 +5,8 @@ const SPEED = 600.0
 const JUMP_VELOCITY = -1250.0
 var GRAVITY = 1000
 
+var touch_direction = 0
+
 var highscore = 0
 var collected_eggs = 0
 var collected_golden_eggs = 0
@@ -25,10 +27,14 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	# HERE WE USE ARROWS TO MOVE, SHOULD CHANGE TO GYROSCOPE LATER
+	#if $LeftTouchArea.is_pressed():
+	
 	var direction = Input.get_axis("ui_left", "ui_right")
 	var accelerometer = Input.get_accelerometer()
 	
-	if accelerometer.x != 0:
+	if touch_direction:
+		velocity.x = touch_direction * SPEED
+	elif accelerometer.x != 0:
 		velocity.x = accelerometer.x * SPEED
 	else:
 		if direction:
@@ -75,4 +81,14 @@ func get_collected_eggs():
 	
 func get_collected_golden_eggs():
 	return collected_golden_eggs
+	
+func set_touch_direction_left():
+	touch_direction = -1
+
+func set_touch_direction_right():
+	touch_direction = 1
+	
+func reset_touch():
+	touch_direction = 0
+	
 

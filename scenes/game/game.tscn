@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://t8ii3gmlqbec"]
+[gd_scene load_steps=11 format=3 uid="uid://t8ii3gmlqbec"]
 
 [ext_resource type="Texture2D" uid="uid://eun4hkixjgvw" path="res://assets/tilemap/tilemap.png" id="1_rtstu"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_vwakq"]
@@ -546,6 +546,9 @@ texture = ExtResource("1_rtstu")
 [sub_resource type="TileSet" id="TileSet_yhk4f"]
 sources/0 = SubResource("TileSetAtlasSource_l47ca")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mark6"]
+size = Vector2(360, 1300)
+
 [node name="level" type="Node2D"]
 script = ExtResource("1_vwakq")
 
@@ -570,8 +573,25 @@ position = Vector2(360, 640)
 script = ExtResource("5_821do")
 
 [node name="gameOver" parent="Camera2D" instance=ExtResource("6_5f0xf")]
+visible = false
 z_index = 999
 position = Vector2(-2, 2)
 script = ExtResource("7_x3nxu")
 
+[node name="LeftTouchArea" type="TouchScreenButton" parent="."]
+position = Vector2(179, 649)
+shape = SubResource("RectangleShape2D_mark6")
+shape_centered = false
+shape_visible = false
+
+[node name="RightTouchArea" type="TouchScreenButton" parent="."]
+position = Vector2(540, 649)
+shape = SubResource("RectangleShape2D_mark6")
+shape_centered = false
+shape_visible = false
+
 [connection signal="player_out_of_screen" from="Player" to="Camera2D/gameOver" method="_on_player_player_out_of_screen"]
+[connection signal="pressed" from="LeftTouchArea" to="Player" method="set_touch_direction_left"]
+[connection signal="released" from="LeftTouchArea" to="Player" method="reset_touch"]
+[connection signal="pressed" from="RightTouchArea" to="Player" method="set_touch_direction_right"]
+[connection signal="released" from="RightTouchArea" to="Player" method="reset_touch"]
