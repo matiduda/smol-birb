@@ -4,6 +4,8 @@ const SPEED = 600.0
 const JUMP_VELOCITY = -1250.0
 var GRAVITY = 1000
 
+signal player_out_of_screen
+
 func _physics_process(delta):
 	# APPLY GRAVITY
 	if not is_on_floor():
@@ -36,4 +38,4 @@ func _physics_process(delta):
 	move_and_slide()
 
 func handle_game_over():
-	print("GAME OVER")
+	player_out_of_screen.emit()

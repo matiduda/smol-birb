@@ -32,12 +32,12 @@ func spawn_platforms_inbounds():
 		existing_platforms.append(new_platform)
 		add_child(new_platform)
 		return null;
-
+		
 func _ready():
 	existing_platforms.append($platform)
 	existing_platforms.append($platform6)
 	spawn_platforms_inbounds()
-	
+
 func _physics_process(delta):
 	spawn_platforms_inbounds()
 	remove_platforms_offscreen()

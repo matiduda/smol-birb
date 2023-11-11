@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://soi0ukhd5ia7"]
+[gd_scene load_steps=7 format=3 uid="uid://cugbd5b7qniqh"]
 
 [ext_resource type="Texture2D" uid="uid://d3qs3kcfo86vu" path="res://assets/interface/graphics/logo.png" id="1_qqak4"]
 [ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_u5aox"]
-[ext_resource type="Script" path="res://scenes/menu/scripts/ButtonController.gd" id="3_cj4rd"]
+[ext_resource type="Script" path="res://scenes/menu/menuButtonController.gd" id="3_u31em"]
 
 [sub_resource type="Gradient" id="Gradient_d7b3v"]
 offsets = PackedFloat32Array(0, 0.32967, 1)
@@ -58,7 +58,7 @@ theme_override_font_sizes/font_size = 75
 text = "Start"
 icon = ExtResource("2_u5aox")
 icon_alignment = 1
-script = ExtResource("3_cj4rd")
+script = ExtResource("3_u31em")
 scene_path = "res://scenes/game/game.tscn"
 
 [node name="StoreButton" type="MenuButton" parent="ButtonsContainer/VBoxContainer"]
@@ -74,7 +74,7 @@ theme_override_font_sizes/font_size = 75
 text = "Store"
 icon = ExtResource("2_u5aox")
 icon_alignment = 1
-script = ExtResource("3_cj4rd")
+script = ExtResource("3_u31em")
 
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_do_nothing"]

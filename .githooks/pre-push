@@ -1,13 +1,5 @@
 #!/bin/bash -u
 
-if [[ "$1" != "all" ]]; then
-    echo "Please use:"
-    echo ""
-    echo "git push all"
-    echo ""
-    exit 1
-fi
-
 requiredRemotes=(
     "https://github.com/matiduda/smol-birb"
 )
@@ -38,3 +30,12 @@ do
         exit 1
     fi
 done
+
+
+if [[ "$1" != "all" ]]; then
+    echo "Please use:"
+    echo ""
+    echo "git push all"
+    echo ""
+    exit 1
+fi
