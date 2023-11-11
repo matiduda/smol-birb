@@ -37,6 +37,6 @@ func _ready():
 	existing_platforms.append($platform6)
 	spawn_platforms_inbounds()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	spawn_platforms_inbounds()
 	remove_platforms_offscreen()

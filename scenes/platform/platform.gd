@@ -17,7 +17,7 @@ func _ready():
 	if position.x > 0:
 		try_spawn_item()
 		
-func _process(delta):
+func _process(_delta):
 	var player_position = player.position
 	if player_position.y > self.position.y:
 		$CollisionShape2D.disabled = true

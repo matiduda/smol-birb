@@ -51,7 +51,7 @@ func _physics_process(delta):
 func handle_game_over():
 	
 	player_dead = true
-	player_out_of_screen.emit()
+	player_out_of_screen.emit(collected_eggs, collected_golden_eggs)
 	
 	# SAVE PROGRESS
 	var data = SavedData.new()
@@ -69,3 +69,10 @@ func add_item(item_type):
 		collected_eggs += 1
 	elif item_type == ItemType.GOLDEN_EGG:
 		collected_golden_eggs += 1
+		
+func get_collected_eggs():
+	return self.collected_eggs
+	
+func get_collected_golden_eggs():
+	return collected_golden_eggs
+

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8baqcca85sw7"]
+[gd_scene load_steps=7 format=3 uid="uid://b8baqcca85sw7"]
 
 [ext_resource type="Texture2D" uid="uid://cilcrp4kvphqw" path="res://assets/interface/Spritesheet_UI_Flat.png" id="1_n4rde"]
 [ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_dyyfi"]
 [ext_resource type="Script" path="res://scenes/popup/popupButtonController.gd" id="3_orw7w"]
+[ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="4_270il"]
+[ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="5_dojo1"]
 
 [sub_resource type="Theme" id="Theme_jfdhx"]
 
@@ -30,15 +32,56 @@ patch_margin_bottom = 5
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect"]
+[node name="GameOverLabel" type="RichTextLabel" parent="NinePatchRect"]
 clip_contents = false
 layout_mode = 0
-offset_left = 67.0
-offset_top = 19.0
-offset_right = 607.0
-offset_bottom = 145.0
+offset_left = 66.0
+offset_top = 4.5
+offset_right = 606.0
+offset_bottom = 130.5
 theme_override_font_sizes/normal_font_size = 92
 text = "GAME OVER"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CollectedLabel" type="RichTextLabel" parent="NinePatchRect"]
+clip_contents = false
+layout_mode = 0
+offset_left = 42.0
+offset_top = 198.0
+offset_right = 196.0
+offset_bottom = 243.0
+theme_override_font_sizes/normal_font_size = 32
+text = "Collected:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="EggLabel" type="RichTextLabel" parent="NinePatchRect"]
+clip_contents = false
+layout_mode = 0
+offset_left = 322.0
+offset_top = 101.5
+offset_right = 419.0
+offset_bottom = 227.5
+theme_override_font_sizes/normal_font_size = 92
+text = "0	"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+tab_size = 0
+
+[node name="GoldenEggLabel" type="RichTextLabel" parent="NinePatchRect"]
+clip_contents = false
+layout_mode = 0
+offset_left = 323.0
+offset_top = 198.5
+offset_right = 448.0
+offset_bottom = 324.5
+theme_override_colors/default_color = Color(0.839216, 0.839216, 0, 1)
+theme_override_font_sizes/normal_font_size = 92
+text = "0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -80,6 +123,16 @@ text = "Back to menu"
 icon = ExtResource("2_dyyfi")
 icon_alignment = 1
 script = ExtResource("3_orw7w")
+
+[node name="Egg" type="Sprite2D" parent="NinePatchRect"]
+position = Vector2(267, 170.5)
+scale = Vector2(1.07288, 1.07288)
+texture = ExtResource("4_270il")
+
+[node name="GoldenEgg" type="Sprite2D" parent="NinePatchRect"]
+position = Vector2(274.63, 262.375)
+scale = Vector2(0.0935854, 0.0935854)
+texture = ExtResource("5_dojo1")
 
 [connection signal="pressed" from="NinePatchRect/RestartButton" to="NinePatchRect/RestartButton" method="_reset_current_scene"]
 [connection signal="pressed" from="NinePatchRect/BackToMenuButton" to="NinePatchRect/RestartButton" method="_go_back_to_menu"]
