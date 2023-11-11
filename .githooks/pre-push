@@ -33,7 +33,7 @@ do
         echo ""
         echo "git remote add all https://github.com/IIS-Mobile/PGiAnUP_zima_2023_stacjonarne_bigOS"
         echo "git remote set-url --add --push all $i"
-        echo "git remote set-url --add --push origin https://github.com/IIS-Mobile/PGiAnUP_zima_2023_stacjonarne_bigOS"
+        echo "git remote set-url --add --push all https://github.com/IIS-Mobile/PGiAnUP_zima_2023_stacjonarne_bigOS"
         echo ""
         exit 1
     fi
