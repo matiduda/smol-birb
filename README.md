@@ -1,4 +1,4 @@
-[![.github/workflows/create-github-release.yml](https://github.com/matiduda/big-birb-run/actions/workflows/create-github-release.yml/badge.svg)](https://github.com/matiduda/big-birb-run/actions/workflows/create-github-release.yml) [![.github/workflows/publish-game-to-itch-io.yml](https://github.com/matiduda/big-birb-run/actions/workflows/publish-game-to-itch-io.yml/badge.svg)](https://github.com/matiduda/big-birb-run/actions/workflows/publish-game-to-itch-io.yml)
+[![.github/workflows/create-github-release.yml](https://github.com/matiduda/smol-birb/actions/workflows/create-github-release.yml/badge.svg)](https://github.com/matiduda/smol-birb/actions/workflows/create-github-release.yml) [![.github/workflows/publish-game-to-itch-io.yml](https://github.com/matiduda/smol-birb/actions/workflows/publish-game-to-itch-io.yml/badge.svg)](https://github.com/matiduda/smol-birb/actions/workflows/publish-game-to-itch-io.yml)
 
 ## [Play on itch.io](https://tanczmy.itch.io/big-birb-run)
 
@@ -16,7 +16,9 @@ $ git config --global user.email your@email.com
 ```
 5. Open the project in godot and go to Project > Version Control > Version Control Settings and put your github credentials there (SSH key not needed)
 6. Go to Editor > Manage Export Templates > click Download and Install
-7. You're ready to start developing features
+7. Configure hooks using `git config --local core.hooksPath .githooks/`
+
+8. You're ready to start developing features
 
 ## Code guidelines
 
