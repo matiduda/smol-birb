@@ -10,12 +10,12 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@1.1.1
         with:
           file: itch.io.zip
-          token: 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
+          token: ${{ secrets.GIT }}
 
       - name: deploy to itch.io (HTML5)
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
-          BUTLER_CREDENTIALS: 8FrnKAFeno3XIWdTmeTn5rLAAb6qAzmcmthJIZhz
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH }}
           CHANNEL: html
           ITCH_GAME: big-birb-run
           ITCH_USER: tanczmy
