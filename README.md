@@ -1,4 +1,4 @@
-[![.github/workflows/create-github-release.yml](https://github.com/matiduda/big-birb-run/actions/workflows/create-github-release.yml/badge.svg)](https://github.com/matiduda/big-birb-run/actions/workflows/create-github-release.yml) [![.github/workflows/publish-game-to-itch-io.yml](https://github.com/matiduda/big-birb-run/actions/workflows/publish-game-to-itch-io.yml/badge.svg)](https://github.com/matiduda/big-birb-run/actions/workflows/publish-game-to-itch-io.yml)
+[![.github/workflows/create-github-release.yml](https://github.com/matiduda/smol-birb/actions/workflows/create-github-release.yml/badge.svg)](https://github.com/matiduda/smol-birb/actions/workflows/create-github-release.yml) [![.github/workflows/publish-game-to-itch-io.yml](https://github.com/matiduda/smol-birb/actions/workflows/publish-game-to-itch-io.yml/badge.svg)](https://github.com/matiduda/smol-birb/actions/workflows/publish-game-to-itch-io.yml)
 
 ## [Play on itch.io](https://tanczmy.itch.io/big-birb-run)
 
