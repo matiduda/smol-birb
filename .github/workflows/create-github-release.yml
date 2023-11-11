@@ -41,3 +41,9 @@ jobs:
           generateReleaseNotes: true
           tag: ${{ github.ref_name }}
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
+
+      - name: notify on discord
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD }}
