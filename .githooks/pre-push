@@ -1,0 +1,32 @@
+#!/bin/bash -u
+
+requiredRemotes=(
+    "https://github.com/matiduda/smol-birb"
+)
+
+foundRemotes=()
+
+mapfile -t foundRemotes < <( git config -l | grep 'url' )
+
+for i in ${requiredRemotes[@]}
+do
+    found=0
+    for j in ${foundRemotes[@]}
+    do
+        foundRemote=${j#*=}
+        if [[ "$foundRemote" == "$i" ]]; then
+            found=1
+            break
+        fi
+    done
+    if [[ $found -eq 0 ]]; then
+        echo "Remote '$i' not found in git remotes"
+        echo "Please add it before pushing using:"
+        echo ""
+        echo "git remote add all https://github.com/IIS-Mobile/PGiAnUP_zima_2023_stacjonarne_bigOS"
+        echo "git remote set-url --add --push all $i"
+        echo "git remote set-url --add --push origin https://github.com/IIS-Mobile/PGiAnUP_zima_2023_stacjonarne_bigOS"
+        echo ""
+        exit 1
+    fi
+done
