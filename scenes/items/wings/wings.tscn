@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://bncdq3u02qibi"]
+
+[ext_resource type="Script" path="res://scenes/items/wings/wings.gd" id="1_16k4w"]
+[ext_resource type="Texture2D" uid="uid://crkn7epxrqm24" path="res://assets/items/wing.png" id="1_mmh3p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtfji"]
+size = Vector2(57, 27.5)
+
+[sub_resource type="Animation" id="Animation_3bfc4"]
+resource_name = "flap"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightWing:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftWing:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehuwr"]
+_data = {
+"flap": SubResource("Animation_3bfc4")
+}
+
+[node name="wings" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_16k4w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vtfji")
+
+[node name="RightWing" type="Sprite2D" parent="."]
+position = Vector2(16, 0)
+texture = ExtResource("1_mmh3p")
+hframes = 2
+vframes = 2
+
+[node name="LeftWing" type="Sprite2D" parent="."]
+position = Vector2(-15, 0)
+texture = ExtResource("1_mmh3p")
+flip_h = true
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehuwr")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -3,13 +3,15 @@ class_name Player
 
 const SPEED = 600.0
 const JUMP_VELOCITY = -1250.0
-var GRAVITY = 1000
+const GRAVITY = 1000
+const WINGS_ACTIVE_TIME_SECONDS = 4
 
 var touch_direction = 0
 
 var highscore = 0
 var collected_eggs = 0
 var collected_golden_eggs = 0
+var wings_collected = false
 
 var player_dead = false
 signal player_out_of_screen;
@@ -25,9 +27,10 @@ func _physics_process(delta):
 	# JUMP ON PLATFORM
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		
-	# HERE WE USE ARROWS TO MOVE, SHOULD CHANGE TO GYROSCOPE LATER
-	#if $LeftTouchArea.is_pressed():
+	
+	# BOOST FROM WINGS
+	if wings_collected:
+		velocity.y = JUMP_VELOCITY
 	
 	var direction = Input.get_axis("ui_left", "ui_right")
 	var accelerometer = Input.get_accelerometer()
@@ -64,7 +67,13 @@ func add_item(item_type):
 		collected_eggs += 1
 	elif item_type == ItemType.GOLDEN_EGG:
 		collected_golden_eggs += 1
-		
+	elif item_type == ItemType.WINGS:
+		if wings_collected:
+			return
+		wings_collected = true
+		$PlayerWings.visible = true
+		$WingsTimer.start()
+				
 func get_collected_eggs():
 	return collected_eggs
 	
@@ -80,4 +89,6 @@ func set_touch_direction_right():
 func reset_touch():
 	touch_direction = 0
 	
-
+func _on_wings_timer_timeout():
+	wings_collected = false
+	$PlayerWings.visible = false

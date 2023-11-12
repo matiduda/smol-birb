@@ -2,5 +2,6 @@ class_name ItemType
 
 enum {
 	EGG,
-	GOLDEN_EGG
+	GOLDEN_EGG,
+	WINGS
 }
