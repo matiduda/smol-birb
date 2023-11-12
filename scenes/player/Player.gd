@@ -55,20 +55,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func handle_game_over():
-	
 	player_dead = true
 	player_out_of_screen.emit(collected_eggs, collected_golden_eggs)
-	
-	# SAVE PROGRESS
-	var data = SavedData.new()
-	var already_persisted_data = GameResourceSaver.load_data()
-	
-	if highscore > already_persisted_data.highscore:
-		data.highscore = highscore
-	data.eggs = already_persisted_data.eggs + collected_eggs
-	data.golden_eggs = already_persisted_data.golden_eggs + collected_golden_eggs
-	GameResourceSaver.save_data(data)
-	
+	GameState.update_state(highscore, collected_eggs, collected_golden_eggs, true)
 	
 func add_item(item_type):
 	if item_type == ItemType.EGG:
@@ -77,7 +66,7 @@ func add_item(item_type):
 		collected_golden_eggs += 1
 		
 func get_collected_eggs():
-	return self.collected_eggs
+	return collected_eggs
 	
 func get_collected_golden_eggs():
 	return collected_golden_eggs

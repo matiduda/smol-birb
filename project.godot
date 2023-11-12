@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.1")
 
 [autoload]
 
-GameResourceSaver="*res://utils/saving_data/GameResourceSaver.gd"
+GameState="*res://utils/game_state/GameState.gd"
 
 [display]
 

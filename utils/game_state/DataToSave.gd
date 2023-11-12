@@ -1,6 +1,6 @@
 extends Resource
 
-class_name SavedData
+class_name DataToSave
 
 @export var highscore = 0
 @export var eggs = 0
