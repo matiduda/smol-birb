@@ -16,6 +16,10 @@ var wings_collected = false
 var player_dead = false
 signal player_out_of_screen;
 
+func _ready():
+	set_collision_layer_value(1, true)
+	set_collision_mask_value(0, true)
+	
 func _physics_process(delta):
 	# APPLY GRAVITY
 	if not is_on_floor():
@@ -56,6 +60,12 @@ func _physics_process(delta):
 		handle_game_over()
 
 	move_and_slide()
+	for index in get_slide_collision_count():
+		var collider = get_slide_collision(index).get_collider()
+		if collider is BrokenPlatform:
+			var collider_id = collider.get_instance_id()
+			instance_from_id(collider_id).visible = false
+			instance_from_id(collider_id).get_child(1).disabled = true
 
 func handle_game_over():
 	player_dead = true

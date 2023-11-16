@@ -1,5 +1,5 @@
 extends StaticBody2D
-class_name Platform
+class_name BrokenPlatform
 
 @onready var player = get_parent().get_node("Player")
 
@@ -25,7 +25,10 @@ func _process(_delta):
 		$CollisionShape2D.disabled = true
 	else:
 		$CollisionShape2D.disabled = false
-	pass
+	
+func body_entered(body):
+	# Destroy the platform when any body enters
+	queue_free()
 
 func try_spawn_item():
 	var chance_to_spawn = randf_range(0, 1)
