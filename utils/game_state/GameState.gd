@@ -14,10 +14,10 @@ const FILE_NAME = "user://save.tres"
 func _ready():
 	load_state()
 	
-func update_state(new_highscore: int, collected_eggs: int,
+func update_state(score: int, collected_eggs: int,
 				collected_golden_eggs: int, should_save: bool):
-	if highscore < new_highscore:
-		highscore = new_highscore
+	if highscore < score:
+		highscore = score
 	eggs += collected_eggs
 	golden_eggs += collected_golden_eggs
 	
