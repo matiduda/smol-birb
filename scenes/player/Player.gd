@@ -14,7 +14,6 @@ var collected_eggs = 0
 var collected_golden_eggs = 0
 var wings_collected = false
 
-var player_dead = false
 signal player_out_of_screen;
 
 func _physics_process(delta):
@@ -54,13 +53,21 @@ func _physics_process(delta):
 		update_score()
 	
 	# HANDLE GAME OVER
-	if global_position.y > get_parent().get_node("Camera2D").global_position.y + get_viewport_rect().size.y / 2 and not player_dead:
+	if global_position.y > get_parent().get_node("Camera2D").global_position.y + get_viewport_rect().size.y / 2:
 		handle_game_over()
 
 	move_and_slide()
 
 func handle_game_over():
-	player_dead = true
+	# HERE IF SECOND LIFE HAS BEEN BOUGHT WE ACTIVATE WINGS
+	if GameState.second_life:
+		global_position.y -= 50
+		GameState.set_second_life(false, true)
+		activate_wings()
+		return
+		
+	visible = false
+	set_physics_process(false)
 	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
 	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
 	
@@ -72,10 +79,14 @@ func add_item(item_type):
 	elif item_type == ItemType.WINGS:
 		if wings_collected:
 			return
-		wings_collected = true
-		$PlayerWings.visible = true
-		$WingsTimer.start()
+		activate_wings()
 				
+func activate_wings():
+	wings_collected = true
+	$PlayerWings.visible = true	
+	$Particles.set_emitting(true)	
+	$WingsTimer.start()
+
 func update_score():
 	var new_score = int(abs(global_position.y) * POSITION_TO_SCORE_SCALE)
 	if new_score > score:
@@ -102,3 +113,5 @@ func reset_touch():
 func _on_wings_timer_timeout():
 	wings_collected = false
 	$PlayerWings.visible = false
+	$Particles.set_emitting(false)
+	
