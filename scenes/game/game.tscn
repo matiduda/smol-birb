@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://t8ii3gmlqbec"]
+[gd_scene load_steps=12 format=3 uid="uid://t8ii3gmlqbec"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_vwakq"]
+[ext_resource type="Texture2D" uid="uid://bwki4fno7t8w4" path="res://assets/textures/GameBackground.png" id="2_3y8o7"]
 [ext_resource type="PackedScene" uid="uid://c056v766y5uxb" path="res://scenes/player/player.tscn" id="2_lyhcf"]
+[ext_resource type="Texture2D" uid="uid://dug2pch0c26e6" path="res://assets/textures/Clouds.png" id="3_edofr"]
 [ext_resource type="PackedScene" uid="uid://s6vocm7x3a4s" path="res://scenes/platform/platform.tscn" id="3_v8o81"]
+[ext_resource type="Texture2D" uid="uid://cnuaupxnsvl45" path="res://assets/textures/GameBackgroundDark.png" id="3_wgdmb"]
 [ext_resource type="Script" path="res://scenes/game/Camera2D.gd" id="5_821do"]
+[ext_resource type="Texture2D" uid="uid://6ms2niywbywc" path="res://assets/textures/planets.png" id="5_wcjhi"]
 [ext_resource type="PackedScene" uid="uid://b8baqcca85sw7" path="res://scenes/popup/gameOver.tscn" id="6_5f0xf"]
 [ext_resource type="Script" path="res://scenes/popup/gameOver.gd" id="7_x3nxu"]
 
@@ -12,6 +16,35 @@ size = Vector2(360, 1300)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_vwakq")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="BackgroudColor" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 1280)
+motion_scale = Vector2(0, 0)
+motion_offset = Vector2(0, 640)
+motion_mirroring = Vector2(0, 1280)
+
+[node name="BackgroundNight" type="Sprite2D" parent="ParallaxBackground/BackgroudColor"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(360, 145)
+texture = ExtResource("3_wgdmb")
+
+[node name="BackgroudDay" type="Sprite2D" parent="ParallaxBackground/BackgroudColor"]
+position = Vector2(360, 145)
+texture = ExtResource("2_3y8o7")
+
+[node name="Moving" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(1480, 1596)
+motion_scale = Vector2(0.25, 0.25)
+motion_mirroring = Vector2(3200, 3200)
+
+[node name="Planets" type="Sprite2D" parent="ParallaxBackground/Moving"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("5_wcjhi")
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/Moving"]
+texture = ExtResource("3_edofr")
 
 [node name="Player" parent="." instance=ExtResource("2_lyhcf")]
 scale = Vector2(10, 10)

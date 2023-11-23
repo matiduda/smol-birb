@@ -88,7 +88,7 @@ func activate_wings():
 	$WingsTimer.start()
 
 func update_score():
-	var new_score = int(abs(global_position.y) * POSITION_TO_SCORE_SCALE)
+	var new_score = int(abs(global_position.y) * POSITION_TO_SCORE_SCALE) #DEBUG + 490
 	if new_score > score:
 		score = new_score
 
