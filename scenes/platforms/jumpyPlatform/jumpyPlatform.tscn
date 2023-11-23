@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://nw5fvcsrxqxy"]
+
+[ext_resource type="Script" path="res://scenes/platforms/jumpyPlatform/jumpyPlatform.gd" id="1_ebjsj"]
+[ext_resource type="Texture2D" uid="uid://d047aamnn68f7" path="res://assets/tilemap/tileset_platformer.png" id="2_qs4l3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77yub"]
+size = Vector2(94, 19)
+
+[node name="JumpyPlatform" type="StaticBody2D"]
+script = ExtResource("1_ebjsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(70, 14)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_qs4l3")
+region_enabled = true
+region_rect = Rect2(96.7399, 71.443, 93.0402, 23.8973)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(70, 14.5)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_77yub")

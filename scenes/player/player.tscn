@@ -153,7 +153,7 @@ position = Vector2(0, -10)
 scale = Vector2(0.5, 0.5)
 
 [node name="WingsTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 3.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -161,5 +161,8 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_4m5tq")
 }
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="WingsTimer" to="." method="_on_wings_timer_timeout"]

@@ -1,8 +1,12 @@
 extends CharacterBody2D
 class_name Player
 
+const reduction = 0.2
+
 const SPEED = 600.0
-const JUMP_VELOCITY = -1250.0
+var jump_amped = false
+var JUMP_VELOCITY = -1250.0
+const BASE_JUMP_VELOCITY = -1250.0
 const GRAVITY = 1000
 const WINGS_ACTIVE_TIME_SECONDS = 4
 
@@ -59,6 +63,10 @@ func _physics_process(delta):
 	if global_position.y > get_viewport_rect().size.y and not player_dead:
 		handle_game_over()
 
+	if $Timer.is_stopped() and jump_amped:
+		JUMP_VELOCITY = BASE_JUMP_VELOCITY
+		jump_amped = false
+
 	move_and_slide()
 	for index in get_slide_collision_count():
 		var collider = get_slide_collision(index).get_collider()
@@ -66,6 +74,8 @@ func _physics_process(delta):
 			var collider_id = collider.get_instance_id()
 			instance_from_id(collider_id).visible = false
 			instance_from_id(collider_id).get_child(1).disabled = true
+		if collider is JumpyPlatform:
+			accelerate()
 
 func handle_game_over():
 	player_dead = true
@@ -102,3 +112,11 @@ func reset_touch():
 func _on_wings_timer_timeout():
 	wings_collected = false
 	$PlayerWings.visible = false
+	
+func accelerate():
+	print(JUMP_VELOCITY)
+	if JUMP_VELOCITY != BASE_JUMP_VELOCITY:
+		return
+	$Timer.start()
+	jump_amped = true
+	JUMP_VELOCITY *= 1.4

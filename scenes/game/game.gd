@@ -8,6 +8,8 @@ const PLATFORM_MIN_DISTANCE_Y = 210
 
 var regularPlatform = preload("res://scenes/platforms/regularPlatform/regularPlatform.tscn")
 var brokenPlatform = preload("res://scenes/platforms/brokenPlatform/brokenPlatform.tscn")
+var jumpyPlatform = preload("res://scenes/platforms/jumpyPlatform/jumpyPlatform.tscn")
+var fakePlatform = preload("res://scenes/platforms/fakePlatform/fakePlatform.tscn")
 var platformInstances = []
 var position_cap = Vector2(720, -500)
 var existing_platforms = []
@@ -39,6 +41,11 @@ func _ready():
 	existing_platforms.append($platform6)
 	platformInstances.append(regularPlatform)
 	platformInstances.append(brokenPlatform)
+	platformInstances.append(jumpyPlatform)
+	platformInstances.append(fakePlatform)
+	platformInstances.append(regularPlatform)
+	platformInstances.append(brokenPlatform)
+	platformInstances.append(jumpyPlatform)
 
 func _physics_process(_delta):
 	spawn_platforms_inbounds()

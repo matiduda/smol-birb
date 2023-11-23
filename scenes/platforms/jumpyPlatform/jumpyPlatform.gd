@@ -1,5 +1,5 @@
 extends StaticBody2D
-class_name RegularPlatform
+class_name JumpyPlatform
 
 @onready var player = get_parent().get_node("Player")
 
@@ -7,7 +7,7 @@ const ITEM_SPAWN_OFFSET_Y = 2
 
 const EGG_SPAWN_CHANCE = .4
 const GOLDEN_EGG_SPAWN_CHANCE = .03
-const WINGS_SPAWN_CHANCE = .10
+const WINGS_SPAWN_CHANCE = .05
 
 var egg = preload("res://scenes/items/egg/Egg.tscn")
 var golden_egg = preload("res://scenes/items/golden_egg/GoldenEgg.tscn")
@@ -25,7 +25,10 @@ func _process(_delta):
 		$CollisionShape2D.disabled = true
 	else:
 		$CollisionShape2D.disabled = false
-	pass
+	
+func body_entered(body):
+	# Destroy the platform when any body enters
+	queue_free()
 
 func try_spawn_item():
 	var chance_to_spawn = randf_range(0, 1)
