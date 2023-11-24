@@ -18,12 +18,12 @@ var SHOP_ITEM_CONFIG = {
 	],
 	"Normal bird": [
 		ShopItemType.Normal,
-		1,
+		100,
 		"res://assets/items/birb.png"
 	],
 	"Special bird": [
 		ShopItemType.Normal,
-		2,
+		500,
 		"res://assets/items/birb_skin.png"
 	],
 }
