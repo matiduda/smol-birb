@@ -16,6 +16,19 @@ var wings_collected = false
 
 signal player_out_of_screen;
 
+const PLAYER_SKINS = {
+	"default": "res://assets/characters/birb.png",
+	"special": "res://assets/characters/birb_special.png"
+}
+
+
+func _ready():
+	var skin_texture = load(PLAYER_SKINS[GameState.active_skin])
+	$Sprite2D.set_texture(skin_texture)
+	if GameState.wings_bought:
+		activate_wings()
+		GameState.wings_bought = false
+
 func _physics_process(delta):
 	# APPLY GRAVITY
 	if not is_on_floor():

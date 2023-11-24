@@ -9,7 +9,8 @@ const FILE_NAME = "user://save.tres"
 
 # FOR LATER
 @export var chest_keys: int = 0
-@export var active_skin = ""
+@export var active_skin = "default"
+@export var wings_bought = false
 
 # RETRIEVE SAVED DATA
 func _ready():

@@ -34,5 +34,8 @@ func set_price(price: int):
 	item_price = price
 	$VBoxContainer/Button.text = str(price)
 
+func set_enabled(enough_funds_for_item: bool):
+	$VBoxContainer/Button.disabled = !enough_funds_for_item
+
 func _on_button_pressed():
 	emit_signal("buy_requested", item_name)

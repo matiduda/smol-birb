@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ranxt5e6bcp8"]
+[gd_scene load_steps=9 format=3 uid="uid://ranxt5e6bcp8"]
 
 [ext_resource type="Script" path="res://scenes/shop/shop.gd" id="1_85slv"]
 [ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="1_fl1fe"]
 [ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="2_5lqbi"]
+[ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_8f35m"]
+[ext_resource type="Script" path="res://scenes/menu/menuButtonController.gd" id="3_fgemu"]
 
 [sub_resource type="Gradient" id="Gradient_d7b3v"]
 offsets = PackedFloat32Array(0, 0.32967, 1)
@@ -10,6 +12,8 @@ colors = PackedColorArray(0.184314, 0.529412, 0.921569, 1, 0.490823, 0.700689, 0
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_be8oa"]
 gradient = SubResource("Gradient_d7b3v")
+
+[sub_resource type="Theme" id="Theme_fg0du"]
 
 [node name="shop" type="Node2D"]
 script = ExtResource("1_85slv")
@@ -19,6 +23,26 @@ position = Vector2(360, 640)
 rotation = 1.5708
 scale = Vector2(19.9997, 11.2495)
 texture = SubResource("GradientTexture2D_be8oa")
+
+[node name="StartButton" type="MenuButton" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 388.22
+offset_bottom = 190.0
+scale = Vector2(0.6, 0.6)
+theme = SubResource("Theme_fg0du")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "Menu"
+icon = ExtResource("2_8f35m")
+icon_alignment = 1
+script = ExtResource("3_fgemu")
+scene_path = "res://scenes/menu/menu.tscn"
 
 [node name="Eggs" type="Node2D" parent="."]
 
@@ -59,3 +83,5 @@ offset_bottom = 1248.0
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 50
 columns = 3
+
+[connection signal="pressed" from="StartButton" to="StartButton" method="_switch_to_scene"]
