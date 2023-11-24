@@ -111,5 +111,14 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 vertical_alignment = 1
 
+[node name="HighscoreLabel" type="Label" parent="."]
+offset_left = 28.0
+offset_top = 31.0
+offset_right = 439.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 28
+text = "HIGHSCORE: "
+vertical_alignment = 1
+
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StoreButton" method="_switch_to_scene"]

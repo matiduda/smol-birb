@@ -15,8 +15,8 @@ var wings = preload("res://scenes/items/wings/wings.tscn")
 
 func _ready():
 	# THIS IF IS NEEDED BECAUSE WE DON'T WANT TO SPAWN ON STARTING PLATFORM
-	# AND IT IS THE ONLY ONE THAT HAS POSITION.X < 0
-	if position.x > 0:
+	# AND IT IS THE ONLY ONE THAT HAS POSITION.Y > 0
+	if position.y < 0:
 		try_spawn_item()
 		
 func _process(_delta):
