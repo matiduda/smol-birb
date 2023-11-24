@@ -69,6 +69,12 @@ func _physics_process(delta):
 	if global_position.y > get_parent().get_node("Camera2D").global_position.y + get_viewport_rect().size.y / 2:
 		handle_game_over()
 
+	# HANDLE PLAYER TEXTURE FLIP
+	if velocity.x > 0:
+		$Sprite2D.flip_h = false
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
+		
 	move_and_slide()
 
 func handle_game_over():
