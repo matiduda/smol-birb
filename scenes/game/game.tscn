@@ -58,6 +58,9 @@ position = Vector2(32, -293)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -448)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("5_821do")
 
 [node name="gameOver" parent="Camera2D" instance=ExtResource("6_5f0xf")]

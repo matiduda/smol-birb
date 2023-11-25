@@ -17,8 +17,10 @@ var existing_platforms = []
 @onready var player = get_node("Player")
 
 func remove_platforms_offscreen():
+	const OFFSET = 70;
+	
 	for existing_platform in existing_platforms:
-		if existing_platform.global_position.y > $Camera2D.global_position.y + get_viewport_rect().size.y / 2:
+		if existing_platform.global_position.y > $Camera2D.global_position.y + get_viewport_rect().size.y / 2 + OFFSET:
 			existing_platforms.erase(existing_platform)
 			existing_platform.queue_free()
 
