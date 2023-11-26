@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bwki4fno7t8w4" path="res://assets/textures/GameBackground.png" id="2_3y8o7"]
 [ext_resource type="PackedScene" uid="uid://c056v766y5uxb" path="res://scenes/player/player.tscn" id="2_lyhcf"]
 [ext_resource type="Texture2D" uid="uid://dug2pch0c26e6" path="res://assets/textures/Clouds.png" id="3_edofr"]
-[ext_resource type="PackedScene" uid="uid://s6vocm7x3a4s" path="res://scenes/platform/platform.tscn" id="3_v8o81"]
+[ext_resource type="PackedScene" uid="uid://s6vocm7x3a4s" path="res://scenes/platforms/regularPlatform/regularPlatform.tscn" id="3_v8o81"]
 [ext_resource type="Texture2D" uid="uid://cnuaupxnsvl45" path="res://assets/textures/GameBackgroundDark.png" id="3_wgdmb"]
 [ext_resource type="Script" path="res://scenes/game/Camera2D.gd" id="5_821do"]
 [ext_resource type="Texture2D" uid="uid://6ms2niywbywc" path="res://assets/textures/planets.png" id="5_wcjhi"]

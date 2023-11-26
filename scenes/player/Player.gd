@@ -1,8 +1,12 @@
 extends CharacterBody2D
 class_name Player
 
+const reduction = 0.2
+
 const SPEED = 600.0
-const JUMP_VELOCITY = -1250.0
+var jump_amped = false
+var JUMP_VELOCITY = -1250.0
+const BASE_JUMP_VELOCITY = -1250.0
 const GRAVITY = 1000
 const WINGS_ACTIVE_TIME_SECONDS = 4
 const POSITION_TO_SCORE_SCALE = .01
@@ -16,18 +20,19 @@ var wings_collected = false
 
 signal player_out_of_screen;
 
-const PLAYER_SKINS = {
-	"default": "res://assets/characters/birb.png",
-	"special": "res://assets/characters/birb_special.png"
-}
-
-
 func _ready():
+	set_collision_layer_value(1, true)
+	set_collision_mask_value(0, true)
 	var skin_texture = load(PLAYER_SKINS[GameState.active_skin])
 	$Sprite2D.set_texture(skin_texture)
 	if GameState.wings_bought:
 		activate_wings()
 		GameState.wings_bought = false
+	
+const PLAYER_SKINS = {
+	"default": "res://assets/characters/birb.png",
+	"special": "res://assets/characters/birb_special.png"
+}
 
 func _physics_process(delta):
 	# APPLY GRAVITY
@@ -75,7 +80,19 @@ func _physics_process(delta):
 	if velocity.x < 0:
 		$Sprite2D.flip_h = true
 		
+	if $Timer.is_stopped() and jump_amped:
+		JUMP_VELOCITY = BASE_JUMP_VELOCITY
+		jump_amped = false
+
 	move_and_slide()
+	for index in get_slide_collision_count():
+		var collider = get_slide_collision(index).get_collider()
+		if collider is BrokenPlatform:
+			var collider_id = collider.get_instance_id()
+			instance_from_id(collider_id).visible = false
+			instance_from_id(collider_id).get_child(1).disabled = true
+		if collider is JumpyPlatform:
+			accelerate()
 
 func handle_game_over():
 	# HERE IF SECOND LIFE HAS BEEN BOUGHT WE ACTIVATE WINGS
@@ -134,3 +151,11 @@ func _on_wings_timer_timeout():
 	$PlayerWings.visible = false
 	$Particles.set_emitting(false)
 	
+	
+func accelerate():
+	print(JUMP_VELOCITY)
+	if JUMP_VELOCITY != BASE_JUMP_VELOCITY:
+		return
+	$Timer.start()
+	jump_amped = true
+	JUMP_VELOCITY *= 1.4
