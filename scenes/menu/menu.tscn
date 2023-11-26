@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="4_h0m5e"]
 [ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="5_2ngek"]
 
-[sub_resource type="Gradient" id="Gradient_d7b3v"]
+[sub_resource type="Gradient" id="Gradient_cwegv"]
 offsets = PackedFloat32Array(0, 0.32967, 1)
 colors = PackedColorArray(0.184314, 0.529412, 0.921569, 1, 0.490823, 0.700689, 0.822, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_g5787"]
-gradient = SubResource("Gradient_d7b3v")
+gradient = SubResource("Gradient_cwegv")
 
 [sub_resource type="Theme" id="Theme_prrhd"]
 
@@ -79,6 +79,7 @@ text = "Store"
 icon = ExtResource("2_u5aox")
 icon_alignment = 1
 script = ExtResource("3_u31em")
+scene_path = "res://scenes/shop/shop.tscn"
 
 [node name="Eggs" type="Node2D" parent="."]
 
@@ -98,6 +99,7 @@ offset_top = 120.0
 offset_right = 675.0
 offset_bottom = 163.0
 theme_override_font_sizes/font_size = 28
+text = "0	"
 vertical_alignment = 1
 
 [node name="EggLabel" type="Label" parent="Eggs"]
@@ -106,7 +108,17 @@ offset_top = 31.0
 offset_right = 675.0
 offset_bottom = 74.0
 theme_override_font_sizes/font_size = 28
+text = "0"
+vertical_alignment = 1
+
+[node name="HighscoreLabel" type="Label" parent="."]
+offset_left = 28.0
+offset_top = 31.0
+offset_right = 439.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 28
+text = "HIGHSCORE: "
 vertical_alignment = 1
 
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
-[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_do_nothing"]
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StoreButton" method="_switch_to_scene"]

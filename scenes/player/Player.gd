@@ -9,21 +9,34 @@ var JUMP_VELOCITY = -1250.0
 const BASE_JUMP_VELOCITY = -1250.0
 const GRAVITY = 1000
 const WINGS_ACTIVE_TIME_SECONDS = 4
+const POSITION_TO_SCORE_SCALE = .01
 
 var touch_direction = 0
 
-var highscore = 0
+var score = 0
 var collected_eggs = 0
 var collected_golden_eggs = 0
 var wings_collected = false
 
-var player_dead = false
 signal player_out_of_screen;
 
 func _ready():
 	set_collision_layer_value(1, true)
 	set_collision_mask_value(0, true)
 	
+const PLAYER_SKINS = {
+	"default": "res://assets/characters/birb.png",
+	"special": "res://assets/characters/birb_special.png"
+}
+
+
+func _ready():
+	var skin_texture = load(PLAYER_SKINS[GameState.active_skin])
+	$Sprite2D.set_texture(skin_texture)
+	if GameState.wings_bought:
+		activate_wings()
+		GameState.wings_bought = false
+
 func _physics_process(delta):
 	# APPLY GRAVITY
 	if not is_on_floor():
@@ -41,12 +54,9 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 	
 	var direction = Input.get_axis("ui_left", "ui_right")
-	var accelerometer = Input.get_accelerometer()
 	
 	if touch_direction:
 		velocity.x = touch_direction * SPEED
-	elif accelerometer.x != 0:
-		velocity.x = accelerometer.x * SPEED
 	else:
 		if direction:
 			velocity.x = direction * SPEED
@@ -54,15 +64,25 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	# TELEPORT PLAYER TO LEFT OR RIGHT SCREEN SIDE WHEN OUT OF BOUNDS
-	if global_position.x < 0:
-		global_position.x = get_viewport_rect().size.x
-	elif global_position.x > get_viewport_rect().size.x:
-		global_position.x = 0
+	if global_position.x < -get_viewport_rect().size.x / 2:
+		global_position.x = get_viewport_rect().size.x / 2
+	elif global_position.x > get_viewport_rect().size.x / 2:
+		global_position.x = -get_viewport_rect().size.x / 2
+	
+	# UPDATE SCORE
+	if velocity.y < 0:
+		update_score()
 	
 	# HANDLE GAME OVER
-	if global_position.y > get_viewport_rect().size.y and not player_dead:
+	if global_position.y > get_parent().get_node("Camera2D").global_position.y + get_viewport_rect().size.y / 2:
 		handle_game_over()
 
+	# HANDLE PLAYER TEXTURE FLIP
+	if velocity.x > 0:
+		$Sprite2D.flip_h = false
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
+		
 	if $Timer.is_stopped() and jump_amped:
 		JUMP_VELOCITY = BASE_JUMP_VELOCITY
 		jump_amped = false
@@ -78,9 +98,17 @@ func _physics_process(delta):
 			accelerate()
 
 func handle_game_over():
-	player_dead = true
-	player_out_of_screen.emit(collected_eggs, collected_golden_eggs)
-	GameState.update_state(highscore, collected_eggs, collected_golden_eggs, true)
+	# HERE IF SECOND LIFE HAS BEEN BOUGHT WE ACTIVATE WINGS
+	if GameState.second_life:
+		global_position.y -= 50
+		GameState.set_second_life(false, true)
+		activate_wings()
+		return
+		
+	visible = false
+	set_physics_process(false)
+	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
+	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
 	
 func add_item(item_type):
 	if item_type == ItemType.EGG:
@@ -90,10 +118,22 @@ func add_item(item_type):
 	elif item_type == ItemType.WINGS:
 		if wings_collected:
 			return
-		wings_collected = true
-		$PlayerWings.visible = true
-		$WingsTimer.start()
+		activate_wings()
 				
+func activate_wings():
+	wings_collected = true
+	$PlayerWings.visible = true	
+	$Particles.set_emitting(true)	
+	$WingsTimer.start()
+
+func update_score():
+	var new_score = int(abs(global_position.y) * POSITION_TO_SCORE_SCALE) #DEBUG + 490
+	if new_score > score:
+		score = new_score
+
+func get_score():
+	return score
+
 func get_collected_eggs():
 	return collected_eggs
 	
@@ -112,6 +152,8 @@ func reset_touch():
 func _on_wings_timer_timeout():
 	wings_collected = false
 	$PlayerWings.visible = false
+	$Particles.set_emitting(false)
+	
 	
 func accelerate():
 	print(JUMP_VELOCITY)

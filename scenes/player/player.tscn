@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c056v766y5uxb"]
+[gd_scene load_steps=11 format=3 uid="uid://c056v766y5uxb"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_7wl8o"]
 [ext_resource type="Texture2D" uid="uid://kl31djl26dv3" path="res://assets/characters/birb.png" id="1_o18xy"]
@@ -129,11 +129,24 @@ _data = {
 "walk_right": SubResource("Animation_g3dpn")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwvut"]
+particle_flag_disable_z = true
+spread = 140.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 13.0
+scale_max = 13.0
+color = Color(0.584314, 0.87451, 1, 1)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_7wl8o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.750002, -7)
 shape = SubResource("RectangleShape2D_88lox")
 
@@ -164,5 +177,13 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -1.90735e-06)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_lwvut")
+speed_scale = 2.0
+randomness = 1.0
 
 [connection signal="timeout" from="WingsTimer" to="." method="_on_wings_timer_timeout"]
