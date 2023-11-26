@@ -23,19 +23,16 @@ signal player_out_of_screen;
 func _ready():
 	set_collision_layer_value(1, true)
 	set_collision_mask_value(0, true)
-	
-const PLAYER_SKINS = {
-	"default": "res://assets/characters/birb.png",
-	"special": "res://assets/characters/birb_special.png"
-}
-
-
-func _ready():
 	var skin_texture = load(PLAYER_SKINS[GameState.active_skin])
 	$Sprite2D.set_texture(skin_texture)
 	if GameState.wings_bought:
 		activate_wings()
 		GameState.wings_bought = false
+	
+const PLAYER_SKINS = {
+	"default": "res://assets/characters/birb.png",
+	"special": "res://assets/characters/birb_special.png"
+}
 
 func _physics_process(delta):
 	# APPLY GRAVITY
