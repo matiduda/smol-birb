@@ -151,9 +151,7 @@ func _on_wings_timer_timeout():
 	$PlayerWings.visible = false
 	$Particles.set_emitting(false)
 	
-	
 func accelerate():
-	print(JUMP_VELOCITY)
 	if JUMP_VELOCITY != BASE_JUMP_VELOCITY:
 		return
 	$Timer.start()

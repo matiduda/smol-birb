@@ -1,21 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://4r6mcne4choh"]
 
-[ext_resource type="Script" path="res://scenes/platforms/fakePlatform/fakePlatform.gd" id="1_c7041"]
-[ext_resource type="Texture2D" uid="uid://d047aamnn68f7" path="res://assets/tilemap/tileset_platformer.png" id="2_o2g6h"]
+[ext_resource type="Script" path="res://scenes/platforms/movingPlatform/movingPlatform.gd" id="1_v137d"]
+[ext_resource type="Texture2D" uid="uid://d047aamnn68f7" path="res://assets/tilemap/tileset_platformer.png" id="2_qeh08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkn13"]
 size = Vector2(151, 44)
 
-[node name="FakePlatform" type="StaticBody2D"]
+[node name="MovingPlatform" type="StaticBody2D"]
 scale = Vector2(1, 0.878)
-script = ExtResource("1_c7041")
+script = ExtResource("1_v137d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.745098)
-self_modulate = Color(1, 1, 1, 0.745098)
 position = Vector2(75.5002, 19)
 scale = Vector2(1.62366, 1.24138)
-texture = ExtResource("2_o2g6h")
+texture = ExtResource("2_qeh08")
 region_enabled = true
 region_rect = Rect2(0, 96.507, 93.703, 29.917)
 
@@ -23,4 +21,3 @@ region_rect = Rect2(0, 96.507, 93.703, 29.917)
 modulate = Color(1, 1, 1, 0.745098)
 position = Vector2(75.5, 22)
 shape = SubResource("RectangleShape2D_gkn13")
-disabled = true

@@ -1,5 +1,5 @@
 extends StaticBody2D
-class_name FakePlatform
+class_name MovingPlatform
 
 @onready var player = get_parent().get_node("Player")
 
@@ -8,19 +8,29 @@ const ITEM_SPAWN_OFFSET_Y = 2
 const EGG_SPAWN_CHANCE = .4
 const GOLDEN_EGG_SPAWN_CHANCE = .03
 const WINGS_SPAWN_CHANCE = .05
+const MAX_X = 210
 
 var egg = preload("res://scenes/items/egg/Egg.tscn")
 var golden_egg = preload("res://scenes/items/golden_egg/GoldenEgg.tscn")
 var wings = preload("res://scenes/items/wings/wings.tscn")
+var move_forward = true
 
 func _ready():
-	# THIS IF IS NEEDED BECAUSE WE DON'T WANT TO SPAWN ON STARTING PLATFORM
-	# AND IT IS THE ONLY ONE THAT HAS POSITION.X < 0
-	if position.x > 0:
-		try_spawn_item()
-		
+	try_spawn_item()
+	
 func _process(_delta):
-	pass
+	var player_position = player.position
+	if player_position.y > self.position.y:
+		$CollisionShape2D.disabled = true
+	else:
+		$CollisionShape2D.disabled = false
+		
+func _physics_process(delta):
+	if position.x <= -get_viewport_rect().size.x / 2:
+		move_forward = true
+	elif position.x >= MAX_X:
+		move_forward = false
+	position.x += (2 if move_forward else -2)
 
 func try_spawn_item():
 	var chance_to_spawn = randf_range(0, 1)
