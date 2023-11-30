@@ -7,9 +7,14 @@ var item_type: int = ShopItemType.Normal
 var item_name: String = ""
 var item_price: int = 0
 
+var soundScene = preload("res://scenes/soundengine/soundengine.tscn")
+var soundPlayer
+
 signal buy_requested
 
 func _ready():
+	soundPlayer = soundScene.instantiate()
+	get_tree().root.add_child.call_deferred(soundPlayer)
 	$SpecialBackground.visible = false
 	$StandardBackground.visible = false
 	
@@ -41,4 +46,5 @@ func set_enabled(enough_funds_for_item: bool):
 	$VBoxContainer/Button.disabled = !enough_funds_for_item
 
 func _on_button_pressed():
+	soundPlayer.playSound(soundPlayer.sounds.BUTTONPRESS)
 	emit_signal("buy_requested", item_name)

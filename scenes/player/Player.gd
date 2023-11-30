@@ -11,8 +11,6 @@ const BASE_JUMP_VELOCITY = -1250.0
 var soundScene = preload("res://scenes/soundengine/soundengine.tscn")
 var soundPlayer
 
-const SPEED = 600.0
-const JUMP_VELOCITY = -1250.0
 const GRAVITY = 1000
 const WINGS_ACTIVE_TIME_SECONDS = 4
 const POSITION_TO_SCORE_SCALE = .01
@@ -32,8 +30,10 @@ const PLAYER_SKINS = {
 signal player_out_of_screen;
 
 func _ready():
+	soundPlayer = soundScene.instantiate()
+	get_tree().root.add_child.call_deferred( soundPlayer)
 	set_collision_layer_value(1, true)
-	set_collision_mask_value(0, true)
+	set_collision_mask_value(30, true)
 	var skin_texture = load(PLAYER_SKINS[GameState.active_skin])
 	$Sprite2D.set_texture(skin_texture)
 	if GameState.wings_bought:
@@ -168,8 +168,3 @@ func accelerate():
 	$Timer.start()
 	jump_amped = true
 	JUMP_VELOCITY *= 1.4
-	
-func _ready():
-	soundPlayer = soundScene.instantiate()
-	get_tree().root.add_child.call_deferred( soundPlayer)
-	

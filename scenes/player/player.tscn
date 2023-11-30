@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_7wl8o"]
 [ext_resource type="Texture2D" uid="uid://kl31djl26dv3" path="res://assets/characters/birb.png" id="1_o18xy"]
 [ext_resource type="PackedScene" uid="uid://bncdq3u02qibi" path="res://scenes/items/wings/wings.tscn" id="3_4pe5y"]
-[ext_resource type="AudioStream" uid="uid://bcqjymfnnixxg" path="res://assets/sounds/theme.mp3" id="4_q3lv2"]
+[ext_resource type="AudioStream" uid="uid://cvjff7y2d1saq" path="res://assets/sounds/theme.mp3" id="4_138n4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88lox"]
 size = Vector2(14, 15)
@@ -188,7 +188,7 @@ speed_scale = 2.0
 randomness = 1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_q3lv2")
+stream = ExtResource("4_138n4")
 autoplay = true
 
 [connection signal="timeout" from="WingsTimer" to="." method="_on_wings_timer_timeout"]
