@@ -7,9 +7,8 @@ const FILE_NAME = "user://save.tres"
 @export var golden_eggs: int = 0
 @export var second_life = false
 
-# FOR LATER
-@export var chest_keys: int = 0
-@export var active_skin = "default"
+@export var active_skin = "Normal bird"
+@export var bought_skins = ["Normal bird"]
 @export var wings_bought = false
 
 # RETRIEVE SAVED DATA
@@ -31,6 +30,13 @@ func set_second_life(second_life: bool, should_save: bool):
 	
 	if should_save:
 		save_state()
+
+func set_active_skin(active_skin, should_save: bool):
+	self.active_skin = active_skin
+	if not self.bought_skins.has(active_skin):
+		self.bought_skins.append(active_skin)
+	if should_save:
+		save_state()
 	
 func load_state() -> void:
 	if ResourceLoader.exists(FILE_NAME):
@@ -40,6 +46,8 @@ func load_state() -> void:
 			eggs = data.eggs
 			golden_eggs = data.golden_eggs
 			second_life = data.second_life
+			active_skin = data.active_skin
+			bought_skins = data.bought_skins
 	else:
 		print("CANNOT LOAD SAVED DATA")
 
@@ -49,6 +57,8 @@ func save_state():
 	data.eggs = eggs
 	data.golden_eggs = golden_eggs
 	data.second_life = second_life
+	data.active_skin = active_skin
+	data.bought_skins = bought_skins
 	var result = ResourceSaver.save(data, FILE_NAME)
 	if result != OK:
 		print("WARNING!! FAILED TO PERSIST GAME DATA IN FILE")

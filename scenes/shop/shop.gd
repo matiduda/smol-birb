@@ -11,18 +11,18 @@ var SHOP_ITEM_CONFIG = {
 		50,
 		"res://assets/items/wing.png"
 	],
-	"Golden key": [
-		ShopItemType.Golden,
-		1000,
-		"res://assets/items/golden_key.png"
+	"Second life": [
+		ShopItemType.Normal,
+		200,
+		"res://assets/items/heart.png"
 	],
 	"Normal bird": [
-		ShopItemType.Normal,
-		100,
+		ShopItemType.Golden,
+		0,
 		"res://assets/items/birb.png"
 	],
 	"Special bird": [
-		ShopItemType.Normal,
+		ShopItemType.Golden,
 		500,
 		"res://assets/items/birb_skin.png"
 	],
@@ -40,9 +40,12 @@ func _ready():
 		$Items.add_child(new_item) #this adds the new crop as a child of the current node
 		
 		var item_config =  SHOP_ITEM_CONFIG[item]
+		# SET SKIN PRICE TO 0 IF ALREADY BOUGHT
+		if item in GameState.bought_skins:
+			item_config[1] = 0 
 		_configure_item(new_item, item, item_config)
 		all_items.push_back(new_item)
-		
+	
 		new_item.connect("buy_requested", on_buy_requested)
 		
 	_update_all_items_enabled()
@@ -61,20 +64,18 @@ func _update_all_items_enabled():
 			all_items[i].set_enabled(GameState.eggs >= item_config[1])
 		if item_config[0] == ShopItemType.Golden:
 			all_items[i].set_enabled(GameState.golden_eggs >= item_config[1])
-		if item == "Normal bird" && GameState.active_skin == "default":
-			all_items[i].set_enabled(false)
-		if item == "Special bird" && GameState.active_skin == "special":
+		if GameState.active_skin == item:
 			all_items[i].set_enabled(false)
 		i += 1
-		
 		
 func _refresh_wallet():
 	$Eggs/EggLabel.text = str(GameState.eggs)
 	$Eggs/GoldenEggLabel.text = str(GameState.golden_eggs)
 
 func on_buy_requested(item_name):
-	var item_price = SHOP_ITEM_CONFIG[item_name][1]
-	var item_type = SHOP_ITEM_CONFIG[item_name][0]
+	var item = SHOP_ITEM_CONFIG[item_name]
+	var item_price = item[1]
+	var item_type = item[0]
 	
 	if item_type == ShopItemType.Normal:
 		if GameState.eggs < item_price:
@@ -96,9 +97,9 @@ func _process_buy_request(item_name):
 	match item_name:
 		"Wings":
 			GameState.wings_bought = true
-		"Golden key":
-			GameState.chest_keys += 1
+		"Second life":
+			GameState.second_life = true
 		"Normal bird":
-			GameState.active_skin = "default"
+			GameState.set_active_skin(item_name, true)
 		"Special bird":
-			GameState.active_skin = "special"
+			GameState.set_active_skin(item_name, true)

@@ -23,6 +23,9 @@ func set_item_type(type: int):
 			$VBoxContainer/Button.icon = button_golden_icon
 			$SpecialBackground.visible = true
 	
+func get_item_name() -> String:
+	return item_name
+
 func set_item_name(value: String):
 	item_name = value
 	$VBoxContainer/Label.text = value

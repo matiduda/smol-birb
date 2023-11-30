@@ -18,6 +18,11 @@ var collected_eggs = 0
 var collected_golden_eggs = 0
 var wings_collected = false
 
+const PLAYER_SKINS = {
+	"Normal bird": "res://assets/characters/birb.png",
+	"Special bird": "res://assets/characters/birb_special.png"
+}
+
 signal player_out_of_screen;
 
 func _ready():
@@ -28,11 +33,6 @@ func _ready():
 	if GameState.wings_bought:
 		activate_wings()
 		GameState.wings_bought = false
-	
-const PLAYER_SKINS = {
-	"default": "res://assets/characters/birb.png",
-	"special": "res://assets/characters/birb_special.png"
-}
 
 func _physics_process(delta):
 	# APPLY GRAVITY
