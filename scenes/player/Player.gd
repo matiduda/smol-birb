@@ -7,6 +7,12 @@ const SPEED = 600.0
 var jump_amped = false
 var JUMP_VELOCITY = -1250.0
 const BASE_JUMP_VELOCITY = -1250.0
+
+var soundScene = preload("res://scenes/soundengine/soundengine.tscn")
+var soundPlayer
+
+const SPEED = 600.0
+const JUMP_VELOCITY = -1250.0
 const GRAVITY = 1000
 const WINGS_ACTIVE_TIME_SECONDS = 4
 const POSITION_TO_SCORE_SCALE = .01
@@ -44,6 +50,7 @@ func _physics_process(delta):
 		
 	# JUMP ON PLATFORM
 	if is_on_floor():
+		soundPlayer.playSound(soundPlayer.sounds.STEP)
 		velocity.y = JUMP_VELOCITY
 	
 	# BOOST FROM WINGS
@@ -102,15 +109,18 @@ func handle_game_over():
 		activate_wings()
 		return
 		
+	soundPlayer.playSound(soundPlayer.sounds.DEATH)
 	visible = false
 	set_physics_process(false)
 	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
 	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
 	
-func add_item(item_type):
+func add_item( item_type):
 	if item_type == ItemType.EGG:
+		soundPlayer.playSound(soundPlayer.sounds.EGG)
 		collected_eggs += 1
 	elif item_type == ItemType.GOLDEN_EGG:
+		soundPlayer.playSound(soundPlayer.sounds.GOLDENEGG)
 		collected_golden_eggs += 1
 	elif item_type == ItemType.WINGS:
 		if wings_collected:
@@ -122,6 +132,7 @@ func activate_wings():
 	$PlayerWings.visible = true	
 	$Particles.set_emitting(true)	
 	$WingsTimer.start()
+	soundPlayer.playSound(soundPlayer.sounds.WINGS)
 
 func update_score():
 	var new_score = int(abs(global_position.y) * POSITION_TO_SCORE_SCALE) #DEBUG + 490
@@ -157,3 +168,8 @@ func accelerate():
 	$Timer.start()
 	jump_amped = true
 	JUMP_VELOCITY *= 1.4
+	
+func _ready():
+	soundPlayer = soundScene.instantiate()
+	get_tree().root.add_child.call_deferred( soundPlayer)
+	
