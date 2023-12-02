@@ -112,8 +112,14 @@ func handle_game_over():
 	soundPlayer.playSound(soundPlayer.sounds.DEATH)
 	visible = false
 	set_physics_process(false)
-	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
 	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
+	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
+
+func resume():
+	global_position.y -= 50
+	visible = true		
+	set_physics_process(true)
+	activate_wings()
 	
 func add_item( item_type):
 	if item_type == ItemType.EGG:
