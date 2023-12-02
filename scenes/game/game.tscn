@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://s6vocm7x3a4s" path="res://scenes/platforms/regularPlatform/regularPlatform.tscn" id="3_v8o81"]
 [ext_resource type="Texture2D" uid="uid://cnuaupxnsvl45" path="res://assets/textures/GameBackgroundDark.png" id="3_wgdmb"]
 [ext_resource type="Script" path="res://scenes/game/Camera2D.gd" id="5_821do"]
-[ext_resource type="Texture2D" uid="uid://6ms2niywbywc" path="res://assets/textures/planets.png" id="5_wcjhi"]
+[ext_resource type="Texture2D" uid="uid://cuj4vbp5cllcs" path="res://assets/textures/planets2.png" id="5_r2u4r"]
 [ext_resource type="PackedScene" uid="uid://b8baqcca85sw7" path="res://scenes/popup/gameOver.tscn" id="6_5f0xf"]
 [ext_resource type="Script" path="res://scenes/popup/gameOver.gd" id="7_x3nxu"]
 
@@ -35,16 +35,16 @@ position = Vector2(360, 145)
 texture = ExtResource("2_3y8o7")
 
 [node name="Moving" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(1480, 1596)
+position = Vector2(323.98, 1596)
 motion_scale = Vector2(0.25, 0.25)
 motion_mirroring = Vector2(3200, 3200)
 
-[node name="Planets" type="Sprite2D" parent="ParallaxBackground/Moving"]
-modulate = Color(1, 1, 1, 0)
-texture = ExtResource("5_wcjhi")
-
 [node name="Clouds" type="Sprite2D" parent="ParallaxBackground/Moving"]
 texture = ExtResource("3_edofr")
+
+[node name="Planets" type="Sprite2D" parent="ParallaxBackground/Moving"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("5_r2u4r")
 
 [node name="Player" parent="." instance=ExtResource("2_lyhcf")]
 scale = Vector2(10, 10)
