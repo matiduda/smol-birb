@@ -27,6 +27,8 @@ const PLAYER_SKINS = {
 	"Special bird": "res://assets/characters/birb_special.png"
 }
 
+const MUSIC_VOL = -10;
+
 signal player_out_of_screen;
 
 func _ready():
@@ -114,13 +116,14 @@ func handle_game_over():
 	set_physics_process(false)
 	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
 	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
-	$AudioStreamPlayer.stop()
+	$AudioStreamPlayer.volume_db = -9999;
 
 func resume():
 	global_position.y -= 50
 	visible = true		
 	set_physics_process(true)
 	activate_wings()
+	$AudioStreamPlayer.volume_db = MUSIC_VOL;
 	
 func add_item( item_type):
 	if item_type == ItemType.EGG:
