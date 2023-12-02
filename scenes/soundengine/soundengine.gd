@@ -19,7 +19,8 @@ enum sounds
 	DEATH,
 	EGG,
 	GOLDENEGG,
-	BUTTONPRESS
+	BUTTONPRESS,
+	PURCHASE_COMPLETE
 }
 
 #Audio StreamPlayer
@@ -29,6 +30,9 @@ var death = load("res://assets/sounds/player_damage.mp3")
 var egg = load("res://assets/sounds/egg.wav")
 var goldenegg = load("res://assets/sounds/goldenegg.wav")
 var buttonpress = load("res://assets/sounds/buttonpress.wav")
+var purchase_complete = load("res://assets/sounds/purchase_complete.mp3")
+
+
 # TO BE CONTINUED...
 
 func playSound( soundName, volume = 0):
@@ -60,6 +64,9 @@ func playSound( soundName, volume = 0):
 			
 		sounds.BUTTONPRESS:
 			newSound.stream = buttonpress
+			
+		sounds.PURCHASE_COMPLETE:
+			newSound.stream = purchase_complete
 
 	newSound.volume_db += volume
 	newSound.play()

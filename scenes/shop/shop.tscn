@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ranxt5e6bcp8"]
+[gd_scene load_steps=10 format=3 uid="uid://ranxt5e6bcp8"]
 
 [ext_resource type="Script" path="res://scenes/shop/shop.gd" id="1_85slv"]
 [ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="1_fl1fe"]
 [ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="2_5lqbi"]
 [ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_8f35m"]
 [ext_resource type="Script" path="res://scenes/menu/menuButtonController.gd" id="3_fgemu"]
+[ext_resource type="PackedScene" uid="uid://i73s4bekcqro" path="res://scenes/popup/purchaseEggs/purchaseEggs.tscn" id="6_y280j"]
 
 [sub_resource type="Gradient" id="Gradient_d7b3v"]
 offsets = PackedFloat32Array(0, 0.32967, 1)
@@ -84,4 +85,47 @@ theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 50
 columns = 3
 
+[node name="GooglePlayLabel" type="Label" parent="."]
+offset_left = 27.0
+offset_top = 132.0
+offset_right = 447.0
+offset_bottom = 225.0
+theme_override_font_sizes/font_size = 20
+text = "No connection"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AddGoldenEggsButton" type="MenuButton" parent="."]
+offset_left = 468.0
+offset_top = 1151.0
+offset_right = 836.22
+offset_bottom = 1321.0
+scale = Vector2(0.6, 0.6)
+theme = SubResource("Theme_fg0du")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "Buy       "
+icon = ExtResource("2_8f35m")
+icon_alignment = 1
+script = ExtResource("3_fgemu")
+scene_path = "res://scenes/menu/menu.tscn"
+
+[node name="GoldenEggSprite" type="Sprite2D" parent="AddGoldenEggsButton"]
+position = Vector2(268.333, 80)
+scale = Vector2(0.130997, 0.130997)
+texture = ExtResource("2_5lqbi")
+
+[node name="purchaseEggs" parent="." instance=ExtResource("6_y280j")]
+visible = false
+position = Vector2(-1, 1)
+
+[connection signal="purchase_complete" from="." to="StartButton" method="_on_shop_purchase_complete"]
 [connection signal="pressed" from="StartButton" to="StartButton" method="_switch_to_scene"]
+[connection signal="pressed" from="AddGoldenEggsButton" to="." method="_open_golden_egg_store"]
+[connection signal="pressed" from="AddGoldenEggsButton" to="StartButton" method="_emit_button_sound"]
+[connection signal="request_exit" from="purchaseEggs" to="StartButton" method="_emit_button_sound"]

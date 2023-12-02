@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scenes/game/Camera2D.gd" id="5_821do"]
 [ext_resource type="Texture2D" uid="uid://cuj4vbp5cllcs" path="res://assets/textures/planets2.png" id="5_r2u4r"]
 [ext_resource type="PackedScene" uid="uid://b8baqcca85sw7" path="res://scenes/popup/gameOver.tscn" id="6_5f0xf"]
-[ext_resource type="Script" path="res://scenes/popup/gameOver.gd" id="7_x3nxu"]
+[ext_resource type="Script" path="res://scenes/gameOver.gd" id="7_x3nxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mark6"]
 size = Vector2(360, 1300)

@@ -29,9 +29,13 @@ var SHOP_ITEM_CONFIG = {
 }
 
 var all_items = []
+var google_play_payment
+
+signal purchase_complete
 
 func _ready():
 	_refresh_wallet()
+	_init_google_play_integration()
 	
 	var item_scene = load("res://scenes/shop/item.tscn")
 		
@@ -49,6 +53,11 @@ func _ready():
 		new_item.connect("buy_requested", on_buy_requested)
 		
 	_update_all_items_enabled()
+	
+	$purchaseEggs.visible = false
+	$purchaseEggs.connect("request_exit", _close_golden_egg_store)
+	$purchaseEggs.connect("select_item", _on_select_golden_egg_purchase)
+
 
 func _configure_item(item, item_name, config):
 	item.set_item_type(config[0])
@@ -103,3 +112,39 @@ func _process_buy_request(item_name):
 			GameState.set_active_skin(item_name, true)
 		"Special bird":
 			GameState.set_active_skin(item_name, true)
+
+func _open_golden_egg_store():
+	$purchaseEggs.visible = true
+	
+func _close_golden_egg_store():
+	$purchaseEggs.visible = false
+	
+func _on_select_golden_egg_purchase(price, amount):
+	$GooglePlayLabel.text = "[DEBUG ]Requested purchase of " + str(amount) + " golden eggs (" + str(price) + ")"
+	GameState.golden_eggs += amount
+	_refresh_wallet()
+	GameState.save_state()
+	_close_golden_egg_store()
+	purchase_complete.emit()
+
+func _init_google_play_integration():
+	if Engine.has_singleton("GodotGooglePlayBilling"):
+		google_play_payment = Engine.get_singleton("GodotGooglePlayBilling")
+		google_play_payment.connected.connect(_on_payment_service_connected)
+		google_play_payment.disconnected.connect(_on_payment_service_disconnected)
+		google_play_payment.connect_error.connect(_on_payment_service_connect_error)
+		google_play_payment.startConnection()
+		$AddGoldenEggsButton.disabled = false
+	else:
+		$GooglePlayLabel.text = "Android IAP support is not enabled. IAP will not work."
+		# $AddGoldenEggsButton.disabled = false # TODO: Remove after debug
+		$AddGoldenEggsButton/GoldenEggSprite.modulate.a = 0.3
+		
+func _on_payment_service_connected():
+	$GooglePlayLabel.text = "Google play connected"
+	
+func _on_payment_service_disconnected():
+	$GooglePlayLabel.text = "Google play disconnected"
+	
+func _on_payment_service_connect_error(id, msg):
+	$GooglePlayLabel.text = "Error while connecting: " + msg

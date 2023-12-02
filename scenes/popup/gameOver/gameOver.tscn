@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cilcrp4kvphqw" path="res://assets/interface/Spritesheet_UI_Flat.png" id="1_n4rde"]
 [ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="2_dyyfi"]
-[ext_resource type="Script" path="res://scenes/popup/popupButtonController.gd" id="3_orw7w"]
-[ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="4_270il"]
-[ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="5_dojo1"]
+[ext_resource type="Script" path="res://scenes/popup/gameOver/popupButtonController.gd" id="3_ej21n"]
+[ext_resource type="Texture2D" uid="uid://cxqiekwrtc40c" path="res://assets/items/egg.png" id="4_thh0m"]
+[ext_resource type="Texture2D" uid="uid://dh7lklofckxxe" path="res://assets/items/golden_egg.png" id="5_6wmdc"]
 
 [sub_resource type="Theme" id="Theme_jfdhx"]
 
@@ -170,7 +170,7 @@ theme_override_font_sizes/font_size = 75
 text = "Restart"
 icon = ExtResource("2_dyyfi")
 icon_alignment = 1
-script = ExtResource("3_orw7w")
+script = ExtResource("3_ej21n")
 
 [node name="ResumeButton" type="MenuButton" parent="NinePatchRect"]
 layout_mode = 0
@@ -190,7 +190,7 @@ theme_override_font_sizes/font_size = 75
 text = "Resume"
 icon = ExtResource("2_dyyfi")
 icon_alignment = 1
-script = ExtResource("3_orw7w")
+script = ExtResource("3_ej21n")
 
 [node name="BackToMenuButton" type="MenuButton" parent="NinePatchRect"]
 layout_mode = 0
@@ -209,32 +209,32 @@ theme_override_font_sizes/font_size = 50
 text = "Back to menu"
 icon = ExtResource("2_dyyfi")
 icon_alignment = 1
-script = ExtResource("3_orw7w")
+script = ExtResource("3_ej21n")
 
 [node name="Egg" type="Sprite2D" parent="NinePatchRect"]
 position = Vector2(207, 160.5)
 scale = Vector2(1.07288, 1.07288)
-texture = ExtResource("4_270il")
+texture = ExtResource("4_thh0m")
 
 [node name="Egg2" type="Sprite2D" parent="NinePatchRect"]
 position = Vector2(473, 161)
 scale = Vector2(1.07288, 1.07288)
-texture = ExtResource("4_270il")
+texture = ExtResource("4_thh0m")
 
 [node name="GoldenEgg" type="Sprite2D" parent="NinePatchRect"]
 position = Vector2(212.63, 278.375)
 scale = Vector2(0.0935854, 0.0935854)
-texture = ExtResource("5_dojo1")
+texture = ExtResource("5_6wmdc")
 
 [node name="GoldenEgg2" type="Sprite2D" parent="NinePatchRect"]
 position = Vector2(490, 451)
 scale = Vector2(0.0935854, 0.0935854)
-texture = ExtResource("5_dojo1")
+texture = ExtResource("5_6wmdc")
 
 [node name="GoldenEgg3" type="Sprite2D" parent="NinePatchRect"]
 position = Vector2(480, 279)
 scale = Vector2(0.0935854, 0.0935854)
-texture = ExtResource("5_dojo1")
+texture = ExtResource("5_6wmdc")
 
 [connection signal="pressed" from="NinePatchRect/RestartButton" to="NinePatchRect/RestartButton" method="_reset_current_scene"]
 [connection signal="pressed" from="NinePatchRect/ResumeButton" to="NinePatchRect/RestartButton" method="_on_resume_button_pressed"]

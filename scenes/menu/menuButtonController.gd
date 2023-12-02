@@ -5,9 +5,8 @@ extends MenuButton
 var soundScene = preload("res://scenes/soundengine/soundengine.tscn")
 var soundPlayer
 
-func _switch_to_scene(quiet = false):
-	if(!quiet):
-		soundPlayer.playSound(soundPlayer.sounds.BUTTONPRESS)
+func _switch_to_scene():
+	soundPlayer.playSound(soundPlayer.sounds.BUTTONPRESS)
 	assert(scene_path != "", "Scene path can't be empty")
 	get_tree().change_scene_to_file(scene_path)
 	
@@ -17,3 +16,9 @@ func _ready():
 	
 func _do_nothing():
 	print("Store not yet implemented")
+
+func _emit_button_sound():
+	soundPlayer.playSound(soundPlayer.sounds.BUTTONPRESS)
+	
+func _on_shop_purchase_complete():
+	soundPlayer.playSound(soundPlayer.sounds.PURCHASE_COMPLETE)

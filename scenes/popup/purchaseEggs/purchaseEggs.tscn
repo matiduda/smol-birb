@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://i73s4bekcqro"]
+
+[ext_resource type="Texture2D" uid="uid://cilcrp4kvphqw" path="res://assets/interface/Spritesheet_UI_Flat.png" id="1_5k17l"]
+[ext_resource type="Script" path="res://scenes/popup/purchaseEggs/purchaseEggs.gd" id="1_21wvx"]
+[ext_resource type="PackedScene" uid="uid://mxgyj2fwm6m6" path="res://scenes/popup/purchaseEggs/PurchaseItem.tscn" id="2_s81hi"]
+[ext_resource type="Texture2D" uid="uid://cq6db0bxsohb7" path="res://assets/interface/buttons/menuButton/greenRectNormal.png" id="3_qhg33"]
+
+[sub_resource type="Theme" id="Theme_78r20"]
+
+[node name="purchaseEggs" type="Node2D"]
+script = ExtResource("1_21wvx")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(700, 1000)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 712.0
+offset_bottom = 1270.0
+grow_vertical = 2
+texture = ExtResource("1_5k17l")
+region_rect = Rect2(32, 32, 96, 96)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="RichTextLabel" parent="NinePatchRect"]
+clip_contents = false
+layout_mode = 0
+offset_left = 366.0
+offset_top = 37.0
+offset_right = 631.0
+offset_bottom = 163.0
+theme_override_font_sizes/normal_font_size = 92
+text = "Select"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PurchaseItem" parent="NinePatchRect" instance=ExtResource("2_s81hi")]
+position = Vector2(200, 355)
+scale = Vector2(1, 1)
+price = 10
+amount = 50
+
+[node name="PurchaseItem2" parent="NinePatchRect" instance=ExtResource("2_s81hi")]
+position = Vector2(507, 355)
+scale = Vector2(1, 1)
+price = 20
+amount = 150
+
+[node name="PurchaseItem3" parent="NinePatchRect" instance=ExtResource("2_s81hi")]
+position = Vector2(200, 696)
+scale = Vector2(1, 1)
+price = 30
+amount = 300
+
+[node name="PurchaseItem4" parent="NinePatchRect" instance=ExtResource("2_s81hi")]
+position = Vector2(507, 696)
+scale = Vector2(1, 1)
+price = 200
+amount = 1000
+
+[node name="PurchaseItem5" parent="NinePatchRect" instance=ExtResource("2_s81hi")]
+position = Vector2(200, 1034)
+scale = Vector2(1, 1)
+price = 500
+amount = 5000
+
+[node name="PurchaseItem6" parent="NinePatchRect" instance=ExtResource("2_s81hi")]
+position = Vector2(507, 1034)
+scale = Vector2(1, 1)
+price = 2000
+amount = 100000
+
+[node name="ExitButton" type="MenuButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 61.0
+offset_right = 435.0
+offset_bottom = 231.0
+scale = Vector2(0.535, 0.535)
+theme = SubResource("Theme_78r20")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Exit"
+icon = ExtResource("3_qhg33")
+icon_alignment = 1
+
+[connection signal="pressed" from="NinePatchRect/ExitButton" to="." method="_request_exit"]
