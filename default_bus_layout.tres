@@ -1,0 +1,13 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dkqgrpqiah4g5"]
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_dr0ci"]
+resource_name = "Compressor"
+threshold = -13.0
+ratio = 8.0
+gain = 6.0
+release_ms = 500.0
+
+[resource]
+bus/0/volume_db = -0.030508
+bus/0/effect/0/effect = SubResource("AudioEffectCompressor_dr0ci")
+bus/0/effect/0/enabled = true

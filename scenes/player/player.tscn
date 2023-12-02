@@ -189,6 +189,7 @@ randomness = 1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_138n4")
+volume_db = -8.0
 autoplay = true
 
 [connection signal="timeout" from="WingsTimer" to="." method="_on_wings_timer_timeout"]

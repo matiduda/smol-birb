@@ -114,6 +114,7 @@ func handle_game_over():
 	set_physics_process(false)
 	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
 	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
+	$AudioStreamPlayer.stop()
 
 func resume():
 	global_position.y -= 50

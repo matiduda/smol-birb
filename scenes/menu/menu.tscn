@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://soi0ukhd5ia7"]
+[gd_scene load_steps=12 format=3 uid="uid://soi0ukhd5ia7"]
 
 [ext_resource type="Script" path="res://scenes/menu/Menu.gd" id="1_ky4yk"]
 [ext_resource type="Texture2D" uid="uid://d3qs3kcfo86vu" path="res://assets/interface/graphics/logo.png" id="1_qqak4"]
@@ -15,6 +15,12 @@ colors = PackedColorArray(0.184314, 0.529412, 0.921569, 1, 0.490823, 0.700689, 0
 gradient = SubResource("Gradient_cwegv")
 
 [sub_resource type="Theme" id="Theme_prrhd"]
+
+[sub_resource type="Gradient" id="Gradient_r68cj"]
+colors = PackedColorArray(0.0588235, 0.0588235, 0.0588235, 1, 0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mqqix"]
+gradient = SubResource("Gradient_r68cj")
 
 [node name="menu" type="Node2D"]
 script = ExtResource("1_ky4yk")
@@ -120,5 +126,23 @@ theme_override_font_sizes/font_size = 28
 text = "HIGHSCORE: "
 vertical_alignment = 1
 
-[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
+[node name="LoadingBackground" type="Sprite2D" parent="."]
+position = Vector2(360, 640)
+rotation = 1.5708
+scale = Vector2(5.58564, 736.36)
+texture = SubResource("GradientTexture1D_mqqix")
+
+[node name="LoadingContainer" type="CenterContainer" parent="."]
+offset_right = 718.0
+offset_bottom = 1274.0
+
+[node name="Label" type="Label" parent="LoadingContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Loading"
+horizontal_alignment = 1
+justification_flags = 0
+
+[connection signal="game_start_requested" from="." to="ButtonsContainer/VBoxContainer/StartButton" method="_switch_to_scene"]
+[connection signal="pressed" from="ButtonsContainer/VBoxContainer/StartButton" to="." method="_onGameStart"]
 [connection signal="pressed" from="ButtonsContainer/VBoxContainer/StoreButton" to="ButtonsContainer/VBoxContainer/StoreButton" method="_switch_to_scene"]

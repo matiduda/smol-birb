@@ -33,12 +33,15 @@ var buttonpress = load("res://assets/sounds/buttonpress.wav")
 
 func playSound( soundName, volume = 0):
 	var newSound = AudioStreamPlayer.new()
+	newSound.bus = "Master"
+	
 	self.add_child( newSound)
 	
 	match( soundName):
 		
 		sounds.STEP:
 			newSound.stream = step
+			newSound.volume_db += 6
 			
 		sounds.WINGS:
 			newSound.stream = wings
@@ -61,7 +64,7 @@ func playSound( soundName, volume = 0):
 	newSound.volume_db += volume
 	newSound.play()
 
-	newSound.finished.connect( newSound.queue_free)
+	newSound.finished.connect(newSound.queue_free)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
