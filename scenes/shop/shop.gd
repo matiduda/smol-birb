@@ -147,12 +147,14 @@ func _on_select_golden_egg_purchase(price, amount):
 		$GooglePlayLabel.text = "Buy request unsuccessful, because payment service is not initialized"
 
 func _finish_payment(successful):
+	$PaymentCover.visible = false
 	if successful:
 		GameState.golden_eggs += pending_eggs
 		_refresh_wallet()
 		GameState.save_state()
 		purchase_complete.emit()
 	pending_eggs = 0
+	
 
 func _init_google_play_integration():
 	if Engine.has_singleton("GodotGooglePlayBilling"):
