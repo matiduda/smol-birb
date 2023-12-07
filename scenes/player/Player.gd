@@ -112,6 +112,8 @@ func handle_game_over():
 		global_position.y -= 50
 		GameState.set_second_life(false, true)
 		activate_wings()
+		collected_eggs = 0;
+		collected_golden_eggs = 0;
 		return
 		
 	soundPlayer.playSound(soundPlayer.sounds.DEATH)
