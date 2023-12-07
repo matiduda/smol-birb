@@ -24,7 +24,10 @@ var wings_collected = false
 
 const PLAYER_SKINS = {
 	"Normal bird": "res://assets/characters/birb.png",
-	"Special bird": "res://assets/characters/birb_special.png"
+	"Special bird": "res://assets/characters/birb_special.png",
+	"Lil'pengu": "res://assets/characters/lil_penguin.png",
+	"Overheat birb": "res://assets/characters/birb_overheat.png",
+	"Handsome birb": "res://assets/characters/birb_handsome.png"
 }
 
 const MUSIC_VOL = -10;

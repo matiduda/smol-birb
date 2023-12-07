@@ -23,9 +23,24 @@ var SHOP_ITEM_CONFIG = {
 	],
 	"Special bird": [
 		ShopItemType.Golden,
-		500,
+		200,
 		"res://assets/items/birb_skin.png"
 	],
+	"Overheat birb": [
+		ShopItemType.Golden,
+		250,
+		"res://assets/items/birb_overheat.png"
+	],
+	"Handsome birb": [
+		ShopItemType.Golden,
+		350,
+		"res://assets/items/birb_handsome.png"
+	],
+	"Lil'pengu": [
+		ShopItemType.Golden,
+		1000,
+		"res://assets/items/lil_penguin.png"
+	]
 }
 
 # Matches Purchase.PurchaseState in the Play Billing Library
@@ -123,6 +138,13 @@ func _process_buy_request(item_name):
 			GameState.set_active_skin(item_name, true)
 		"Special bird":
 			GameState.set_active_skin(item_name, true)
+		"Lil'pengu":
+			GameState.set_active_skin(item_name, true)
+		"Overheat birb":
+			GameState.set_active_skin(item_name, true)
+		"Handsome birb":
+			GameState.set_active_skin(item_name, true)
+			
 
 func _open_golden_egg_store():
 	$purchaseEggs.visible = true
