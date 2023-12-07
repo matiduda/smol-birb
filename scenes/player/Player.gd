@@ -109,11 +109,9 @@ func _physics_process(delta):
 func handle_game_over():
 	# HERE IF SECOND LIFE HAS BEEN BOUGHT WE ACTIVATE WINGS
 	if GameState.second_life:
-		global_position.y -= 50
+		global_position.y -= 70
 		GameState.set_second_life(false, true)
 		activate_wings()
-		collected_eggs = 0;
-		collected_golden_eggs = 0;
 		return
 		
 	soundPlayer.playSound(soundPlayer.sounds.DEATH)
@@ -121,10 +119,12 @@ func handle_game_over():
 	set_physics_process(false)
 	GameState.update_state(score, collected_eggs, collected_golden_eggs, true)
 	player_out_of_screen.emit(score, collected_eggs, collected_golden_eggs)
-	$AudioStreamPlayer.volume_db = -9999;
+	$AudioStreamPlayer.volume_db = -9999
 
 func resume():
-	global_position.y -= 50
+	global_position.y -= 70
+	collected_eggs = 0
+	collected_golden_eggs = 0
 	visible = true		
 	set_physics_process(true)
 	activate_wings()
