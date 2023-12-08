@@ -187,41 +187,49 @@ func _init_google_play_integration():
 
 		google_play_payment.product_details_query_completed.connect(_on_product_details_query_completed) # Products (Dictionary[])
 		google_play_payment.product_details_query_error.connect(_on_product_details_query_error) # Response ID (int), Debug message (string), Queried SKUs (string[])
+		google_play_payment.product_details_query_completed.connect(_on_product_details_query_completed) # Products (Dictionary[])
+		google_play_payment.purchase_consumed.connect(_on_purchase_consumed) # Purchase token (string)
+		google_play_payment.purchase_consumption_error.connect(_on_purchase_consumption_error) # Response ID (int), Debug message (string), Purchase token (string)
+		google_play_payment.query_purchases_response.connect(_on_query_purchases_response) # Purchases (Dictionary[])
+		google_play_payment.purchase_error.connect(_on_purchase_error) # Response ID (int), Debug message (string)
+		google_play_payment.purchases_updated.connect(_on_purchases_updated) # Purchases (Dictionary[])
 
-		
 		google_play_payment.startConnection()
 		$AddGoldenEggsButton.disabled = false
 	else:
-		$GooglePlayLabel.text = "Android IAP support is not enabled. IAP will not work."
+		print("Android IAP support is not enabled. IAP will not work.")
 		$AddGoldenEggsButton.disabled = true
 		$AddGoldenEggsButton/GoldenEggSprite.modulate.a = 0.3
 		
 func _on_payment_service_connected():
 	$GooglePlayLabel.text = "Google play connected"
-	google_play_payment.querySkuDetails(["golden_eggs_50"], "inapp")
-	# Probably once is enough but if we need more:
-	#google_play_payment.querySkuDetails(["golden_eggs_150"], "inapp")
-	#google_play_payment.querySkuDetails(["golden_eggs_300"], "inapp")
-	#google_play_payment.querySkuDetails(["golden_eggs_1000"], "inapp")
-	#google_play_payment.querySkuDetails(["golden_eggs_5000"], "inapp")
-	#google_play_payment.querySkuDetails(["golden_eggs_100000"], "inapp")
-
+	google_play_payment.querySkuDetails([
+		"golden_eggs_50",
+		"golden_eggs_300",
+		"golden_eggs_1000",
+		"golden_eggs_5000",
+		"golden_eggs_100000",
+		], "inapp")
+	
 func _on_product_details_query_completed(product_details):
 	var msg = "Available products: "
 	
 	for available_product in product_details:
 		msg += available_product
-	$GooglePlayLabel.text = msg
 	
 func _on_payment_service_disconnected():
-	$GooglePlayLabel.text = "Google play disconnected"
+	print("Google play disconnected")
 	
 func _on_payment_service_connect_error(id, msg):
-	$GooglePlayLabel.text = "Error while connecting: " + msg
+	print("Error while connecting: " + msg)
 	
 func _on_product_details_query_error(response_id, error_message, products_queried):
-	$GooglePlayLabel.text = "on_product_details_query_error id:" + str(response_id) + " message: " + error_message
+	print("on_product_details_query_error id:" + str(response_id) + " message: " + error_message)
 
+func _on_purchase_error(id, msg):
+	print("Error " + str(id) + " : " + msg)
+	_finish_payment(false)
+	
 func _query_purchases():
 	google_play_payment.queryPurchases("inapp") # Or "subs" for subscriptions
 
@@ -230,35 +238,27 @@ func _on_query_purchases_response(query_result):
 		for purchase in query_result.purchases:
 			_process_purchase(purchase)
 	else:
-		$GooglePlayLabel.text = "queryPurchases failed, response code: " + str(query_result.response_code) + " debug message: " + query_result.debug_message
+		print("queryPurchases failed, response code: " + str(query_result.response_code) + " debug message: " + query_result.debug_message)
 
 func _process_purchase(purchase):
-	if purchase.purchase_state == PurchaseState.PURCHASED:
+	var pending_purchase_id = "golden_eggs_" + str(pending_eggs)
+	if purchase.skus[0] == pending_purchase_id and not purchase.is_acknowledged:
 		google_play_payment.consumePurchase(purchase.purchase_token)
+
+func _on_purchase_acknowledgement_error(id, msg, token):
+	print(msg)
+	$GooglePlayLabel.text = "_on_purchase_acknowledgement_error id:" + str(id) + " message: " + msg + " token: " + token
+
+func _on_purchases_updated(purchases):
+	for purchase in purchases:
+		_process_purchase(purchase)
 
 func _on_purchase_consumed(purchase_token):
 	_handle_purchase_token(purchase_token, true)
 
 func _on_purchase_consumption_error(response_id, error_message, purchase_token):
-	$GooglePlayLabel.text = "_on_purchase_consumption_error id:" + str(response_id) + " message: " + error_message
+	print("_on_purchase_consumption_error id:" + str(response_id) + " message: " + error_message)
 	_handle_purchase_token(purchase_token, false)
 
 func _handle_purchase_token(purchase_token, purchase_successful):
 	_finish_payment(purchase_successful)
-
-# These are all signals supported by the API
-
-# payment.billing_resume.connect(_on_billing_resume) # No params
-# payment.connected.connect(_on_connected) # No params
-# payment.disconnected.connect(_on_disconnected) # No params
-# payment.connect_error.connect(_on_connect_error) # Response ID (int), Debug message (string)
-# payment.price_change_acknowledged.connect(_on_price_acknowledged) # Response ID (int)
-# payment.purchases_updated.connect(_on_purchases_updated) # Purchases (Dictionary[])
-# payment.purchase_error.connect(_on_purchase_error) # Response ID (int), Debug message (string)
-# payment.product_details_query_completed.connect(_on_product_details_query_completed) # Products (Dictionary[])
-# payment.purchase_acknowledged.connect(_on_purchase_acknowledged) # Purchase token (string)
-# payment.purchase_acknowledgement_error.connect(_on_purchase_acknowledgement_error) # Response ID (int), Debug message (string), Purchase token (string)
-# payment.purchase_consumed.connect(_on_purchase_consumed) # Purchase token (string)
-# payment.purchase_consumption_error.connect(_on_purchase_consumption_error) # Response ID (int), Debug message (string), Purchase token (string)
-# payment.query_purchases_response.connect(_on_query_purchases_response) # Purchases (Dictionary[])
-

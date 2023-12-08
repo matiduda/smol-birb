@@ -141,16 +141,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 uppercase = true
 
-[node name="GooglePlayLabel" type="Label" parent="."]
-offset_left = 27.0
-offset_top = 132.0
-offset_right = 447.0
-offset_bottom = 225.0
-theme_override_font_sizes/font_size = 20
-text = "No connection"
-vertical_alignment = 1
-autowrap_mode = 3
-
 [connection signal="purchase_complete" from="." to="StartButton" method="_on_shop_purchase_complete"]
 [connection signal="pressed" from="StartButton" to="StartButton" method="_switch_to_scene"]
 [connection signal="pressed" from="AddGoldenEggsButton" to="." method="_open_golden_egg_store"]

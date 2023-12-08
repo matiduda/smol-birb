@@ -12,7 +12,6 @@ func _init_children():
 	$NinePatchRect/PurchaseItem3.connect("select_purchase", _on_select_golden_egg_purchase)
 	$NinePatchRect/PurchaseItem4.connect("select_purchase", _on_select_golden_egg_purchase)
 	$NinePatchRect/PurchaseItem5.connect("select_purchase", _on_select_golden_egg_purchase)
-	$NinePatchRect/PurchaseItem6.connect("select_purchase", _on_select_golden_egg_purchase)
 
 func _request_exit():
 	request_exit.emit()
