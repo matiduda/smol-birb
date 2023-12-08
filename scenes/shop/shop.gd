@@ -68,9 +68,7 @@ func _ready():
 		$Items.add_child(new_item) #this adds the new crop as a child of the current node
 		
 		var item_config =  SHOP_ITEM_CONFIG[item]
-		# SET SKIN PRICE TO 0 IF ALREADY BOUGHT
-		if item in GameState.bought_skins:
-			item_config[1] = 0 
+
 		_configure_item(new_item, item, item_config)
 		all_items.push_back(new_item)
 	
@@ -95,6 +93,10 @@ func _update_all_items_enabled():
 	var i = 0
 	for item in SHOP_ITEM_CONFIG:
 		var item_config = SHOP_ITEM_CONFIG[item]
+		if item in GameState.bought_skins:
+			item_config[1] = 0
+			all_items[i].set_price(0)
+			all_items[i].set_enabled(true)
 		if item_config[0] == ShopItemType.Normal:
 			all_items[i].set_enabled(GameState.eggs >= item_config[1])
 		if item_config[0] == ShopItemType.Golden:
@@ -173,6 +175,7 @@ func _finish_payment(successful):
 	if successful:
 		GameState.golden_eggs += pending_eggs
 		_refresh_wallet()
+		_update_all_items_enabled()
 		GameState.save_state()
 		purchase_complete.emit()
 	pending_eggs = 0
